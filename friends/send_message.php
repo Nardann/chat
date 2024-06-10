@@ -13,14 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_id']) && isset(
     $friend_id = $_POST['friend_id'];
     $message = $_POST['message'];
 
-    // Mettre à jour le fichier JSON de la conversation
-    $conversation_file = "../data/messages/friend/{$_SESSION['username']}-{$friend_id}.json";
-    $conversation = [];
+    // Déterminer les noms de fichiers pour la conversation
+    $user1 = min($_SESSION['username'], $friend_id);
+    $user2 = max($_SESSION['username'], $friend_id);
+    $conversation_file = "../data/messages/friend/{$user1}-{$user2}.json";
 
-    // Si le fichier existe, charger les messages existants
-    if (file_exists($conversation_file)) {
-        $conversation = json_decode(file_get_contents($conversation_file), true);
-    }
+    // Charger les messages existants ou initialiser un tableau vide
+    $conversation = file_exists($conversation_file) ? json_decode(file_get_contents($conversation_file), true) : [];
 
     // Ajouter le nouveau message à la conversation
     $conversation[] = [
