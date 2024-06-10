@@ -7,16 +7,6 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-include('../config/config.php');
-include('../includes/header.php');
-
-// Vérifier si l'ID de l'ami est spécifié dans l'URL
-if (!isset($_GET['friend_id'])) {
-    echo "ID de l'ami non spécifié.";
-    include('../includes/footer.php');
-    exit();
-}
-
 // Vérifier si les données du formulaire sont soumises
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_id']) && isset($_POST['message'])) {
     // Récupérer les données du formulaire
