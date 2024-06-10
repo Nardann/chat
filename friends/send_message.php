@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('../config/config.php');
+
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['username'])) {
     header("Location: ../login/login.php");
@@ -13,19 +14,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_id']) && isset(
     $friend_id = $_POST['friend_id'];
     $message = $_POST['message'];
 
-    // Récupérer le nom d'utilisateur de l'ami
+    // Récupérer les noms d'utilisateur
+    $user1 = $_SESSION['username'];
     $sql = "SELECT username FROM users WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $friend_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    $friend = $result->fetch_assoc();
-    $friend_username = $friend['username'];
+    $friend_username = $result->fetch_assoc()['username'];
 
-    // Déterminer les noms de fichiers pour la conversation
-    $user1 = $_SESSION['username'];
-    $user2 = $friend_username;
-    $conversation_file = "../data/messages/friend/{$user1}-{$user2}.json";
+    // Construire le nom du fichier de conversation
+    $conversation_file = "../data/messages/friend/" . min($user1, $friend_username) . "-" . max($user1, $friend_username) . ".json";
 
     // Charger les messages existants ou initialiser un tableau vide
     $conversation = file_exists($conversation_file) ? json_decode(file_get_contents($conversation_file), true) : [];
