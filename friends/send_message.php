@@ -1,6 +1,5 @@
 <?php
 session_start();
-include('../config/config.php');
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['username'])) {
@@ -23,8 +22,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_id']) && isset(
     $result = $stmt->get_result();
     $friend_username = $result->fetch_assoc()['username'];
 
-    // Construire le nom du fichier de conversation
-    $conversation_file = "../data/messages/friend/" . min($user1, $friend_username) . "-" . max($user1, $friend_username) . ".json";
+    // Construire les noms de fichiers pour la conversation dans les deux sens
+    $conversation_file1 = "../data/messages/friend/{$user1}-{$friend_username}.json";
+    $conversation_file2 = "../data/messages/friend/{$friend_username}-{$user1}.json";
+
+    // Choix du fichier de conversation existant ou création d'un nouveau fichier
+    if (file_exists($conversation_file1)) {
+        $conversation_file = $conversation_file1;
+    } elseif (file_exists($conversation_file2)) {
+        $conversation_file = $conversation_file2;
+    } else {
+        $conversation_file = $conversation_file1; // Utilisation par défaut
+    }
 
     // Charger les messages existants ou initialiser un tableau vide
     $conversation = file_exists($conversation_file) ? json_decode(file_get_contents($conversation_file), true) : [];
