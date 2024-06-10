@@ -1,11 +1,8 @@
 <?php
-session_start();
-include('../config/config.php');
+include('../includes/auth.php');
+redirectIfNotLoggedIn();
 
-if (!isset($_SESSION['username'])) {
-    header("Location: ../login/login.php");
-    exit();
-}
+include('../config/config.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['friend_id'])) {
     $friendship_id = $_GET['friend_id'];

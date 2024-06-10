@@ -1,4 +1,10 @@
-<?php include('../includes/header.php'); ?>
+<?php 
+include('../includes/auth.php');
+redirectIfLoggedIn();
+
+include('../config/config.php');
+include('../includes/header.php'); 
+?>
 <form action="register_process.php" method="POST">
     <label for="username">Nom d'utilisateur:</label>
     <input type="text" id="username" name="username" required>

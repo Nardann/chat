@@ -1,12 +1,9 @@
 <?php
-session_start();
+include('../includes/auth.php');
+redirectIfNotLoggedIn();
+
 include('../config/config.php');
 include('../includes/header.php');
-
-if (!isset($_SESSION['username'])) {
-    header("Location: ../login/login.php");
-    exit();
-}
 
 $username = $_SESSION['username'];
 $sql = "SELECT id FROM users WHERE username = ?";
