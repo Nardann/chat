@@ -1,0 +1,23 @@
+
+        body {
+            /* Fond noir */
+            background-color: black;
+          
+            /* Couleur bleue pour les mots "password", "email", "prénom" et "nom" */
+            .mot-cle, .email, .prenom, .nom, .password {
+    color: blue;
+  }
+  /* couleur pour les mots "connexion","inscription"*/
+      .Connexion, .inscription {
+          color:blue;
+             }
+          
+            /* Cadre blanc */
+            border: 2px solid white;
+          
+            /* Centrer horizontalement et verticalement */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Assurez-vous que le conteneur a une hauteur minimale pour que le centrage vertical fonctionne */
+          }
