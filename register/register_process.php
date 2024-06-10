@@ -1,4 +1,5 @@
 <?php
+include('../includes/auth.php');
 include('../config/config.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -14,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo "Registration successful";
+        redirectIfLoggedIn()
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
