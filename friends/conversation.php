@@ -30,18 +30,20 @@ $friend_username = $friend['username'];
 
 echo "<h2>Conversation avec $friend_username</h2>";
 
-// Récupérer les messages de la conversation entre l'utilisateur et l'ami
-$sql_messages = "SELECT * FROM messages WHERE (sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?) ORDER BY timestamp";
-$stmt_messages = $conn->prepare($sql_messages);
-$stmt_messages->bind_param("iiii", $_SESSION['user_id'], $friend_id, $friend_id, $_SESSION['user_id']);
-$stmt_messages->execute();
-$result_messages = $stmt_messages->get_result();
-
-echo "<ul>";
-while ($row = $result_messages->fetch_assoc()) {
-    echo "<li>" . $row['content'] . "</li>";
+// Vérifier si le fichier de la conversation existe
+$conversation_file = "../data/messages/friend/{$_SESSION['username']}-{$friend_username}.json";
+if (file_exists($conversation_file)) {
+    // Le fichier de conversation existe, ouvrir et afficher les messages
+    $conversation = json_decode(file_get_contents($conversation_file), true);
+    echo "<ul>";
+    foreach ($conversation as $message) {
+        echo "<li>{$message['content']}</li>";
+    }
+    echo "</ul>";
+} else {
+    // Le fichier de conversation n'existe pas, créer un nouveau fichier
+    file_put_contents($conversation_file, json_encode([]));
 }
-echo "</ul>";
 
 // Formulaire pour envoyer un message
 ?>
@@ -55,7 +57,6 @@ echo "</ul>";
 <?php
 // Fermeture des requêtes et de la connexion
 $stmt_friend->close();
-$stmt_messages->close();
 $conn->close();
 
 include('../includes/footer.php');
