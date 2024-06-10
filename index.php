@@ -1,7 +1,4 @@
-<?php
-    include 'basedonnée.php';
-    include "inscription.php";
-?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
