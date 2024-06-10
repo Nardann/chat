@@ -14,6 +14,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo "Registration successful";
+        echo "<p>Vous serez redirigé vers la page d'accueil dans <span id='countdown'>10</span> secondes.</p>";
+        echo "<script>
+                function updateCountdown() {
+                    var countdownElement = document.getElementById('countdown');
+                    var countdownValue = parseInt(countdownElement.innerText);
+                    countdownValue--;
+
+                    // Si le compte à rebours atteint 0, rediriger vers la page d'accueil
+                    if (countdownValue <= 0) {
+                        window.location.href = "../index.php";
+                    } else {
+                        countdownElement.innerText = countdownValue;
+                        setTimeout(updateCountdown, 1000); // Actualiser toutes les secondes
+                    }
+                }
+
+                // Lancer la mise à jour initiale du compte à rebours
+                updateCountdown();</script>";
+
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

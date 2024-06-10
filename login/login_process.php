@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['username'] = $user['username'];
         echo "Login successful";
+        echo "<script>setTimeout(function() { window.location.href = '../index.php'; }, 5000);</script>";
     } else {
         echo "Invalid username or password";
     }
