@@ -2,8 +2,10 @@
 <form action="register_process.php" method="POST">
     <label for="username">Nom d'utilisateur:</label>
     <input type="text" id="username" name="username" required>
+    <br>
     <label for="name">Nom:</label>
     <input type="text" id="name" name="name" required>
+    <br>
     <label for="firstname">Prénom:</label>
     <input type="text" id="firstname" name="firstname" required>
     <br>
