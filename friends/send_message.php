@@ -1,10 +1,11 @@
 <?php
-error_reporting(E_ALL); 
-ini_set('display_errors', 1);
-include('../includes/auth.php');
-redirectIfNotLoggedIn();
+session_start();
 
-include('../config/config.php');
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['username'])) {
+    header("Location: ../login/login.php");
+    exit();
+}
 
 // Vérifier si les données du formulaire sont soumises
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_id']) && isset($_POST['message'])) {
@@ -12,12 +13,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_id']) && isset(
     $friend_id = $_POST['friend_id'];
     $message = $_POST['message'];
 
-    // Enregistrer le message dans la base de données
-    $sql = "INSERT INTO messages (sender_id, receiver_id, content) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iis", $_SESSION['user_id'], $friend_id, $message);
-    $stmt->execute();
-    $stmt->close();
+    // Mettre à jour le fichier JSON de la conversation
+    $conversation_file = "../data/messages/friend/{$_SESSION['username']}-{$friend_id}.json";
+    $conversation = [];
+
+    // Si le fichier existe, charger les messages existants
+    if (file_exists($conversation_file)) {
+        $conversation = json_decode(file_get_contents($conversation_file), true);
+    }
+
+    // Ajouter le nouveau message à la conversation
+    $conversation[] = [
+        'sender_id' => $_SESSION['user_id'],
+        'receiver_id' => $friend_id,
+        'content' => $message
+    ];
+
+    // Enregistrer la conversation mise à jour dans le fichier JSON
+    file_put_contents($conversation_file, json_encode($conversation));
 
     // Rediriger vers la page de conversation
     header("Location: conversation.php?friend_id=$friend_id");
