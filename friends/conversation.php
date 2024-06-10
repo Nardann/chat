@@ -10,54 +10,36 @@ if (!isset($_SESSION['username'])) {
 include('../config/config.php');
 include('../includes/header.php');
 
-// Vérifier si l'ID de l'ami est spécifié dans l'URL
-if (!isset($_GET['friend_id'])) {
-    echo "ID de l'ami non spécifié.";
-    include('../includes/footer.php');
-    exit();
-}
-
+// Récupérer les données utilisateur et ami
+$user1 = $_SESSION['username'];
 $friend_id = $_GET['friend_id'];
 
-// Récupérer le nom de l'ami à partir de l'ID
-$sql_friend = "SELECT username FROM users WHERE id = ?";
-$stmt_friend = $conn->prepare($sql_friend);
-$stmt_friend->bind_param("i", $friend_id);
-$stmt_friend->execute();
-$result_friend = $stmt_friend->get_result();
-$friend = $result_friend->fetch_assoc();
-$friend_username = $friend['username'];
+$sql = "SELECT username FROM users WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $friend_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$friend_username = $result->fetch_assoc()['username'];
+$stmt->close();
 
-echo "<h2>Conversation avec $friend_username</h2>";
+// Construire le nom du fichier de conversation de manière déterministe
+$conversation_file = "../data/messages/friend/" . (strcmp($user1, $friend_username) < 0 ? "{$user1}-{$friend_username}.json" : "{$friend_username}-{$user1}.json");
 
-// Vérifier si le fichier de la conversation existe
-$conversation_file = "../data/messages/friend/{$_SESSION['username']}-{$friend_username}.json";
-if (file_exists($conversation_file)) {
-    // Le fichier de conversation existe, ouvrir et afficher les messages
-    $conversation = json_decode(file_get_contents($conversation_file), true);
-    echo "<ul>";
-    foreach ($conversation as $message) {
-        echo "<li>{$message['content']}</li>";
-    }
-    echo "</ul>";
-} else {
-    // Le fichier de conversation n'existe pas, créer un nouveau fichier
-    file_put_contents($conversation_file, json_encode([]));
+// Charger les messages existants
+$conversation = file_exists($conversation_file) ? json_decode(file_get_contents($conversation_file), true) : [];
+
+echo "<h2>Conversation with {$friend_username}</h2>";
+
+foreach ($conversation as $message) {
+    $sender = $message['sender'] === $user1 ? 'You' : $friend_username;
+    echo "<p><strong>{$sender}:</strong> {$message['content']}</p>";
 }
-
-// Formulaire pour envoyer un message
 ?>
 
-<form action="./send_message.php" method="post">
+<form action="send_message.php" method="POST">
     <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
-    <input type="text" name="message" placeholder="Type your message here">
-    <button type="submit">Send</button>
+    <textarea name="message" rows="4" cols="50" required></textarea><br>
+    <input type="submit" value="Send">
 </form>
 
-<?php
-// Fermeture des requêtes et de la connexion
-$stmt_friend->close();
-$conn->close();
-
-include('../includes/footer.php');
-?>
+<?php include('../includes/footer.php'); ?>

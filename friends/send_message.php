@@ -7,17 +7,15 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-// Vérifier si les données du formulaire sont soumises
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_id']) && isset($_POST['message'])) {
+    include('../config/config.php');
+
     // Récupérer les données du formulaire
     $friend_id = $_POST['friend_id'];
     $message = $_POST['message'];
 
     // Récupérer les noms d'utilisateur
     $user1 = $_SESSION['username'];
-    
-    include('../config/config.php'); // Assurez-vous que la connexion à la base de données est établie
-    
     $sql = "SELECT username FROM users WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $friend_id);
@@ -35,7 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_id']) && isset(
     // Ajouter le nouveau message à la conversation
     $conversation[] = [
         'sender' => $user1,
-        'receiver' => $friend_username,
         'content' => $message,
         'timestamp' => time()
     ];
