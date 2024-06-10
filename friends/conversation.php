@@ -36,7 +36,7 @@ function loadMessages() {
     $.ajax({
         url: 'get_messages.php',
         type: 'GET',
-        data: {friend_id: '<?php echo $friend_id; ?>'},
+        data: { friend_id: '<?php echo $friend_id; ?>' },
         success: function(data) {
             $('#messages').empty();
             data.forEach(function(message) {
