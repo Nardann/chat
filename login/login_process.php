@@ -1,5 +1,5 @@
 <?php
-include('../includes/auth.php');
+session_start();
 include('../config/config.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -16,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['username'] = $user['username'];
         echo "Login successful";
-        redirectIfLoggedIn()
     } else {
         echo "Invalid username or password";
     }
