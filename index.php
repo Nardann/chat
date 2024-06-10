@@ -10,6 +10,8 @@ include('includes/header.php');
     <a href="friends/friends.php">View Friends</a>
     <br>
     <a href="friends/search.php">Search Users</a>
+    <br>
+    <a href="friends/friend_requests.php">Friend Requests</a>
 <?php else: ?>
     <h1>Welcome to our website</h1>
     <a href="register/register.php">Register</a> | 
