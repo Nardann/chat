@@ -1,4 +1,5 @@
 <?php
+    include 'basedonnée.php';
     include "inscription.php";
 ?>
 
