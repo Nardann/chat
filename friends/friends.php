@@ -14,11 +14,11 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 $user_id = $user['id'];
 
-$sql = "SELECT users.username FROM friendships 
+$sql = "SELECT users.id, users.username FROM friendships 
         JOIN users ON friendships.friend_id = users.id 
         WHERE friendships.user_id = ? AND friendships.status = 'accepted'
         UNION
-        SELECT users.username FROM friendships 
+        SELECT users.id, users.username FROM friendships 
         JOIN users ON friendships.user_id = users.id 
         WHERE friendships.friend_id = ? AND friendships.status = 'accepted'";
 $stmt = $conn->prepare($sql);
@@ -28,7 +28,12 @@ $result = $stmt->get_result();
 
 echo "<h2>Your Friends</h2>";
 while ($row = $result->fetch_assoc()) {
-    echo "<p>" . $row['username'] . "</p>";
+    $friend_id = $row['id'];
+    $friend_username = $row['username'];
+    echo "<form action='conversation.php' method='get'>";
+    echo "<input type='hidden' name='friend_id' value='$friend_id'>";
+    echo "<p>$friend_username <button type='submit'>Open Conversation</button></p>";
+    echo "</form>";
 }
 
 $stmt->close();
