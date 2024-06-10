@@ -6,9 +6,9 @@
     <title>Page Not Found</title>
 </head>
 <body>
-    <h1>Error 404 - Page Not Found</h1>
-    <p>The page you are looking for does not exist.</p>
-    <p>You will be redirected to the homepage in <span id="countdown">10</span> seconds.</p>
+    <h1>Error 404 - Page Non trouvée</h1>
+    <p>La page que vous recherchez n'existe pas.</p>
+    <p>Vous serez redirigé vers la page d'accueil dans <span id="countdown">10</span> secondes.</p>
     <script>
         // Fonction pour mettre à jour le compte à rebours
         function updateCountdown() {
