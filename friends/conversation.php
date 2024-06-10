@@ -43,16 +43,20 @@ while ($row = $result_messages->fetch_assoc()) {
 }
 echo "</ul>";
 
+// Formulaire pour envoyer un message
+?>
+
+<form action="send_message.php" method="post">
+    <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
+    <input type="text" name="message" placeholder="Type your message here">
+    <button type="submit">Send</button>
+</form>
+
+<?php
+// Fermeture des requêtes et de la connexion
 $stmt_friend->close();
 $stmt_messages->close();
 $conn->close();
-
-// Formulaire pour envoyer un message
-echo "<form action='send_message.php' method='post'>";
-echo "<input type='hidden' name='friend_id' value='$friend_id'>";
-echo "<input type='text' name='message' placeholder='Type your message here'>";
-echo "<button type='submit'>Send</button>";
-echo "</form>";
 
 include('../includes/footer.php');
 ?>
