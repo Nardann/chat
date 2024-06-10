@@ -8,6 +8,7 @@ if (!isset($_SESSION['username'])) {
 
 include('../config/config.php');
 include('../includes/header.php');
+include('../includes/navbar.php'); 
 
 $user1 = $_SESSION['username'];
 $friend_id = $_GET['friend_id'];

@@ -4,6 +4,7 @@ redirectIfNotLoggedIn();
 
 include('../config/config.php');
 include('../includes/header.php');
+include('../includes/navbar.php'); 
 
 $username = $_SESSION['username'];
 $sql = "SELECT id FROM users WHERE username = ?";
