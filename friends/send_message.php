@@ -1,13 +1,8 @@
 <?php
 error_reporting(E_ALL); 
 ini_set('display_errors', 1);
-session_start();
-
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['username'])) {
-    header("Location: ../login/login.php");
-    exit();
-}
+include('../includes/auth.php');
+redirectIfNotLoggedIn();
 
 include('../config/config.php');
 
