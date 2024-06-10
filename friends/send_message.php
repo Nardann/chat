@@ -15,8 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_id']) && isset(
     $friend_id = $_POST['friend_id'];
     $message = $_POST['message'];
 
-    // Enregistrer le message dans la base de données ou le stocker dans un fichier JSON, comme vous l'avez implémenté précédemment
-    // Par exemple, enregistrer le message dans la base de données
+    // Enregistrer le message dans la base de données
     $sql = "INSERT INTO messages (sender_id, receiver_id, content) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("iis", $_SESSION['user_id'], $friend_id, $message);
@@ -26,5 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_id']) && isset(
     // Rediriger vers la page de conversation
     header("Location: conversation.php?friend_id=$friend_id");
     exit();
+} else {
+    echo "Error: Invalid request.";
 }
 ?>
