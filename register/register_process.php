@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql = "INSERT INTO users (username, name, firstname, email, password) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $username, $name, $firstname, $email, $password);
+    $stmt->bind_param("sssss", $username, $name, $firstname, $email, $password);
 
     if ($stmt->execute()) {
         echo "Registration successful";
