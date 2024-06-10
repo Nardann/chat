@@ -7,6 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
+    $sql = "INSERT INTO utilisateurs (nom, prenom, email, password) 
+    
     if ($conn->query($sql) === TRUE) {
         echo "<script type='text/javascript'>alert('Inscriptionn effectuée');</script>";
     } else {
