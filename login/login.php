@@ -1,8 +1,9 @@
 <?php 
+include('../config/config.php');
 include('../includes/auth.php');
 redirectIfLoggedIn();
 
-include('../config/config.php');
+
 include('../includes/header.php'); 
 ?>
 
