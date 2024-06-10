@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include('../config/config.php');
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['username'])) {
     header("Location: ../login/login.php");
