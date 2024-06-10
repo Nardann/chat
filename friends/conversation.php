@@ -50,7 +50,7 @@ $conn->close();
 // Formulaire pour envoyer un message
 echo "<form action='send_message.php' method='post'>";
 echo "<input type='hidden' name='friend_id' value='$friend_id'>";
-echo "<textarea name='message' placeholder='Type your message here'></textarea>";
+echo "<input type='text' name='message' placeholder='Type your message here'>";
 echo "<button type='submit'>Send</button>";
 echo "</form>";
 
