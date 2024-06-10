@@ -48,7 +48,7 @@ if (file_exists($conversation_file)) {
 // Formulaire pour envoyer un message
 ?>
 
-<form action="send_message.php" method="post">
+<form action="./send_message.php" method="post">
     <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
     <input type="text" name="message" placeholder="Type your message here">
     <button type="submit">Send</button>
