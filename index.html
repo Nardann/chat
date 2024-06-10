@@ -3,36 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Titre de la page -->
-    <link href="styles.css" rel="stylesheet" type="text/css" />
-
-    <title>Hugo le meilleur</title>
-    <script>
-        function test() {
-            alert("Marc est trop fort");
-        }
-    </script>
+    <title>Inscription</title>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li>Accueil</li>
-            <li>Boutique</li>
-            <li>Formulaire</li>
-        </ul>
-    </nav>
-    <header>
-        <h1>Ceci est un titre principal</h1>
-        <p>Texte classique <em>texte en italique</em> <strong>texte en gras</strong></p>
-        <button onclick="test()">Salut</button>
-    </header>
-    <main>
-        <section>
-            <!--contenu de la section-->
-        </section>
-    </main>
-    <footer>
-        <!-- Contenu du pied de page -->
-    </footer>
+    <h1>Inscription</h1>
+    <form action="inscription.php" method="post">
+        <div class="mb-3">
+            <label for="nom" class="form-label">Nom:</label>
+            <input type="text" class="form-control" id="nom" name="nom" required>
+        </div>
+        <div class="mb-3">
+            <label for="prenom" class="form-label">Prénom:</label>
+            <input type="text" class="form-control" id="prenom" name="prenom" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Adresse email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Mot de passe:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+    </form>
 </body>
 </html>
