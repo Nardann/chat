@@ -19,6 +19,8 @@ if (!isset($_GET['friend_id'])) {
 
 $friend_id = $_GET['friend_id'];
 
+include('../friends/messages/send_message.php');
+
 // Récupérer le nom de l'ami à partir de l'ID
 $sql_friend = "SELECT username FROM users WHERE id = ?";
 $stmt_friend = $conn->prepare($sql_friend);
