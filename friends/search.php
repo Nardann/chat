@@ -22,49 +22,38 @@ $user_id = $user['id'];
 <form action="search.php" method="GET">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
-    <button type="submit">Search</button>
 </form>
 
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['username'])) {
-    $search_username = $_GET['username'];
-    $sql = "SELECT id, username FROM users WHERE username LIKE ?";
-    $stmt = $conn->prepare($sql);
-    $search_term = "%{$search_username}%";
-    $stmt->bind_param("s", $search_term);
-    $stmt->execute();
-    $result = $stmt->get_result();
+<h2>Search Results</h2>
+<div id="search-results"></div>
 
-    echo "<h2>Search Results</h2>";
-    while ($row = $result->fetch_assoc()) {
-        if ($row['username'] != $username) {
-            // Vérifier si une demande d'ami existe déjà ou si déjà amis
-            $friend_id = $row['id'];
-            $sql_check = "SELECT * FROM friendships WHERE (user_id = ? AND friend_id = ?) OR (user_id = ? AND friend_id = ?)";
-            $stmt_check = $conn->prepare($sql_check);
-            $stmt_check->bind_param("iiii", $user_id, $friend_id, $friend_id, $user_id);
-            $stmt_check->execute();
-            $result_check = $stmt_check->get_result();
-
-            if ($result_check->num_rows > 0) {
-                $friendship = $result_check->fetch_assoc();
-                if ($friendship['status'] == 'accepted') {
-                    echo "<p>" . $row['username'] . " (Already friends)</p>";
-                } else {
-                    echo "<p>" . $row['username'] . " (Friend request already exists)</p>";
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#username').on('input', function() {
+        var search_username = $(this).val();
+        if (search_username.length > 0) {
+            $.ajax({
+                url: 'search.php',
+                type: 'GET',
+                data: { username: search_username },
+                success: function(data) {
+                    var results = JSON.parse(data);
+                    $('#search-results').empty();
+                    results.forEach(function(user) {
+                        if (user.status === 'Add Friend') {
+                            $('#search-results').append('<p>' + user.username + ' <a href="add_friend.php?friend_id=' + user.friend_id + '">Add Friend</a></p>');
+                        } else {
+                            $('#search-results').append('<p>' + user.username + ' (' + user.status + ')</p>');
+                        }
+                    });
                 }
-            } else {
-                echo "<p>" . $row['username'] . " <a href='add_friend.php?friend_id=" . $row['id'] . "'>Add Friend</a></p>";
-            }
-
-            $stmt_check->close();
+            });
         } else {
-            echo "<p>" . $row['username'] . " (You)</p>";
+            $('#search-results').empty();
         }
-    }
-
-    $stmt->close();
-}
-?>
+    });
+});
+</script>
 
 <?php include('../includes/footer.php'); ?>
