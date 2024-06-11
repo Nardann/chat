@@ -65,12 +65,6 @@ $(document).ready(function() {
     loadMessages();
     setInterval(loadMessages, 5000);
 });
-$(document).ready(function() {
-    // Get a reference to the div you want to auto-scroll.
-var someElement = document.querySelector('.messageForm');
-  someElement.scrollTop = someElement.scrollHeight;
-}
-);
 </script>
 
 <?php include('../includes/footer.php'); ?>
