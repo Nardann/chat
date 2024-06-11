@@ -6,7 +6,7 @@ include('../includes/navbar.php');
 ?>
 
 <?php if (isset($_SESSION['username'])): 
-include('../includes/navbar.php'); 
+include('includes/navbar.php'); 
 ?>
     <h1>Welcome, <?php echo $_SESSION['username']; ?>!</h1>
     <a href="login/logout.php">Logout</a>
