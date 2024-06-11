@@ -32,3 +32,35 @@ body {
 .space {
 padding: 20px;
 }
+
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.boutons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.bouton_index {
+    background-color: #57ae22; /* Couleur bleu turquoise */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.bouton:hover {
+    background-color: #57ae22; /* Couleur bleu turquoise foncé */
+}
+
+.bouton.inscription {
+    margin-right: 20px;
+}
