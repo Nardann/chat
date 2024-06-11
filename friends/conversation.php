@@ -65,6 +65,9 @@ $(document).ready(function() {
     loadMessages();
     setInterval(loadMessages, 5000);
 });
+    window.onload = function() {
+            window.scrollTo(0, document.body.scrollHeight);
+        };
 </script>
 
 <?php include('../includes/footer.php'); ?>
