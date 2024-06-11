@@ -15,5 +15,11 @@ body {
 }
 
 .link_navbar {
-padding-right: 1%;
+  padding-right: 1%;
+  color: white;
+  text-decoration: none;
+}
+
+.link_navbar:hover {
+  color: black;
 }
