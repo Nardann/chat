@@ -65,6 +65,12 @@ $(document).ready(function() {
     loadMessages();
     setInterval(loadMessages, 5000);
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    var messagesDiv = document.getElementById("messages");
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+});
 </script>
+
 
 <?php include('../includes/footer.php'); ?>
