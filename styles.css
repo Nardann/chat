@@ -1,23 +1,30 @@
+/* Style de la barre de navigation */
+#nav-bar {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-        body {
-            /* Fond noir */
-            background-color: black;
-          
-            /* Couleur bleue pour les mots "password", "email", "prénom" et "nom" */
-            .mot-cle, .email, .prenom, .nom, .password {
-    color: blue;
-  }
-  /* couleur pour les mots "connexion","inscription"*/
-      .Connexion, .inscription {
-          color:blue;
-             }
-          
-            /* Cadre blanc */
-            border: 2px solid white;
-          
-            /* Centrer horizontalement et verticalement */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Assurez-vous que le conteneur a une hauteur minimale pour que le centrage vertical fonctionne */
-          }
+/* Style des liens */
+#nav-bar a {
+  text-decoration: none;
+  color: #fff;
+  padding: 5px 10px;
+}
+
+/* Style du bouton de déconnexion */
+#nav-bar .btn-deconnexion {
+  background-color: #f44336;
+  border: none;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Style du bouton de déconnexion lorsqu'il est survolé */
+#nav-bar .btn-deconnexion:hover {
+  background-color: #d32f26;
+}
