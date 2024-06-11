@@ -16,19 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['username'] = $user['username'];
         echo "Login successful";
-        echo "<p>Vous serez redirigé vers la page d'accueil dans <span id='countdown'>1</span> secondes.</p>";
-        echo "<script>
-                var countdownValue = 5; // Initialiser le compte à rebours
-                var countdownElement = document.getElementById('countdown');
-                var countdownInterval = setInterval(function() {
-                    countdownValue--; // Décrémenter le compte à rebours
-                    countdownElement.innerText = countdownValue; // Mettre à jour l'affichage
-                    if (countdownValue <= 0) {
-                        clearInterval(countdownInterval); // Arrêter le compte à rebours lorsque la redirection est effectuée
-                        window.location.href = '../index.php'; // Redirection vers la page d'accueil
-                    }
-                }, 1000); // Actualiser toutes les secondes
-              </script>";
+        header("Location: ../index.php");
     } else {
         echo "Invalid username or password";
     }
