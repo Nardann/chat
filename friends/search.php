@@ -34,7 +34,7 @@ $(document).ready(function() {
         var search_username = $(this).val();
         if (search_username.length > 0) {
             $.ajax({
-                url: 'search.php',
+                url: 'search_process.php',
                 type: 'GET',
                 data: { username: search_username },
                 success: function(data) {
