@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo "Registration successful";
-        echo "<p>Vous serez redirigé vers la page d'accueil dans <span id='countdown'>10</span> secondes.</p>";
+        echo "<p>Vous serez redirigé vers la page d'accueil dans <span id='countdown'>5</span> secondes.</p>";
         echo "<script>
                 var countdownValue = 5; // Initialiser le compte à rebours
                 var countdownElement = document.getElementById('countdown');
