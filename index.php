@@ -20,7 +20,7 @@ include('includes/navbar.php');
     <div class="container_index">
         <h1>Bienvenue !</h1>
         <div class="boutons_index">
-            <a class="bouton_index" href="register/register.php">Register</a> | 
+            <a class="bouton_index inscription" href="register/register.php">Register</a> | 
             <a class="bouton_index" href="login/login.php">Login</a>
         </div>
     </div>
