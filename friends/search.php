@@ -32,7 +32,7 @@ $user_id = $user['id'];
 $(document).ready(function() {
     $('#username').on('input', function() {
         var search_username = $(this).val();
-        if (search_username.length > 0) {
+        if (search_username.length >= 3) { // Condition pour vérifier si la longueur est au moins 3 caractères
             $.ajax({
                 url: 'search_process.php',
                 type: 'GET',
