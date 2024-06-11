@@ -19,7 +19,7 @@ include('includes/navbar.php');
 <?php else: ?>
     <div class="container_main_index">
         <div class="container_index">
-            <h1>Bienvenue !</h1>
+            <h1 class="h1_index">Bienvenue !</h1>
             <div class="boutons_index">
                 <a class="bouton_index inscription" href="register/register.php">Register</a>
                 <a class="bouton_index" href="login/login.php">Login</a>
