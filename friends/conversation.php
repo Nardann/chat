@@ -1,25 +1,34 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['username'])) {
-    header("Location: ../login/login.php");
-    exit();
-}
+include('../includes/auth.php');
+redirectIfNotLoggedIn();
 
 include('../config/config.php');
 include('../includes/header.php');
 include('../includes/navbar.php'); 
 
-$user1 = $_SESSION['username'];
+$username = $_SESSION['username'];
 $friend_id = $_GET['friend_id'];
 
-$sql = "SELECT username FROM users WHERE id = ?";
+// Récupérer l'ID de l'utilisateur connecté
+$sql = "SELECT id FROM users WHERE username = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $friend_id);
+$stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
-$friend_username = $result->fetch_assoc()['username'];
+$user = $result->fetch_assoc();
+$user_id = $user['id'];
 $stmt->close();
+
+// Déterminer le nom du fichier JSON pour la conversation
+$conversation_file = '../data/messages/friend/' . min($user_id, $friend_id) . '-' . max($user_id, $friend_id) . '.json';
+
+// Vérifier si le fichier de conversation existe, sinon le créer
+if (!file_exists($conversation_file)) {
+    file_put_contents($conversation_file, json_encode([]));
+}
+
+// Charger les messages de la conversation
+$messages = json_decode(file_get_contents($conversation_file), true);
 ?>
 
 <h2>Conversation avec <?php echo htmlspecialchars($_GET['friend_name']); ?></h2>
@@ -39,46 +48,11 @@ $stmt->close();
     <button type="submit">Envoyer</button>
 </form>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-function loadMessages() {
-    $.ajax({
-        url: 'get_messages.php',
-        type: 'GET',
-        data: { friend_id: '<?php echo $friend_id; ?>' },
-        success: function(data) {
-            $('#messages').empty();
-            data.forEach(function(message) {
-                var sender = message.sender === '<?php echo $user1; ?>' ? 'You' : '<?php echo $friend_username; ?>';
-                $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + '</p>');
-            });
-        }
-    });
-}
-
-$('#messageForm').submit(function(e) {
-    e.preventDefault();
-    $.ajax({
-        url: 'send_message.php',
-        type: 'POST',
-        data: $(this).serialize(),
-        success: function() {
-            loadMessages();
-            $('textarea[name="message"]').val('');
-        }
-    });
-});
-
-$(document).ready(function() {
-    loadMessages();
-    setInterval(loadMessages, 5000);
-});
-
 document.addEventListener("DOMContentLoaded", function() {
     var messagesDiv = document.getElementById("messages");
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 });
 </script>
-
 
 <?php include('../includes/footer.php'); ?>
