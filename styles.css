@@ -28,3 +28,7 @@ body {
 .link_navbar:hover {
   color: black;
 }
+
+.space {
+padding: 20px;
+}
