@@ -50,6 +50,9 @@ padding: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+.h1_index{
+  text-align:center
+}
 .boutons_index {
     display: flex;
     justify-content: space-between;
