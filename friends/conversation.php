@@ -64,7 +64,7 @@ $('#messageForm').submit(function(e) {
 $(document).ready(function() {
     loadMessages();
     setInterval(loadMessages, 5000);
-    window.scrollTo(0, document.body.scrollHeight);
+    window.scrollTo(0, 10000000);
 });
 </script>
 
