@@ -64,8 +64,10 @@ $('#messageForm').submit(function(e) {
 $(document).ready(function() {
     loadMessages();
     setInterval(loadMessages, 5000);
-    window.scrollTo(0, 10000000);
 });
+document.addEventListener("DOMContentLoaded", function() {
+            window.scrollTo(0, document.body.scrollHeight);
+        });
 </script>
 
 <?php include('../includes/footer.php'); ?>
