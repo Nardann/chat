@@ -8,10 +8,11 @@ body {
   background: #57AE22;
   width: 150%;
   margin-left: -8px;
-  margin-top: -20px;
+  margin-top: -30px;
   padding: 20px;
   padding-top: 30px;
   border-radius: 10px;
+  position: absolute;
 }
 
 .link_navbar {
