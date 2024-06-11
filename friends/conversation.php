@@ -68,7 +68,7 @@ $(document).ready(function() {
 document.addEventListener("DOMContentLoaded", function() {
 setTimeout(function() {
                 window.scrollTo(0, document.body.scrollHeight);
-            }, 200); /        });
+            }, 1000); /        });
 </script>
 
 <?php include('../includes/footer.php'); ?>
