@@ -18,8 +18,8 @@ include('includes/navbar.php');
     <a href="friends/friend_requests.php">Friend Requests</a>
 <?php else: ?>
     <h1>Welcome to our website</h1>
-    <a href="register/register.php">Register</a> | 
-    <a href="login/login.php">Login</a>
+    <a class="bouton_index" href="register/register.php">Register</a> | 
+    <a class="bouton_index" href="login/login.php">Login</a>
 <?php endif; ?>
 
 <?php include('includes/footer.php'); ?>
