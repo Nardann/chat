@@ -25,7 +25,7 @@ $stmt->close();
 <h2>Conversation with <?php echo $friend_username; ?></h2>
 <div id="messages"></div>
 
-<form id="messageForm">
+<form class="messageForm" id="messageForm">
     <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
     <textarea name="message" rows="4" cols="50" required></textarea><br>
     <input type="submit" value="Send">
@@ -65,6 +65,12 @@ $(document).ready(function() {
     loadMessages();
     setInterval(loadMessages, 5000);
 });
+$(document).ready(function() {
+    // Get a reference to the div you want to auto-scroll.
+var someElement = document.querySelector('.messageForm');
+  someElement.scrollTop = someElement.scrollHeight;
+}
+);
 </script>
 
 <?php include('../includes/footer.php'); ?>
