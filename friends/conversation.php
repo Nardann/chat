@@ -22,13 +22,21 @@ $friend_username = $result->fetch_assoc()['username'];
 $stmt->close();
 ?>
 
-<h2>Conversation with <?php echo $friend_username; ?></h2>
-<div id="messages"></div>
+<h2>Conversation avec <?php echo htmlspecialchars($_GET['friend_name']); ?></h2>
 
-<form id="messageForm">
+<div id="messages" style="height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
+    <?php
+    foreach ($messages as $message) {
+        $sender = $message['sender_id'] == $user_id ? 'Vous' : htmlspecialchars($_GET['friend_name']);
+        echo "<p><strong>{$sender}:</strong> " . htmlspecialchars($message['content']) . "</p>";
+    }
+    ?>
+</div>
+
+<form action="send_message.php" method="POST">
     <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
-    <textarea name="message" rows="4" cols="50" required></textarea><br>
-    <input type="submit" value="Send">
+    <textarea name="message" required></textarea>
+    <button type="submit">Envoyer</button>
 </form>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
