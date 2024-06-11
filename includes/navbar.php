@@ -1,4 +1,4 @@
-<nav>
+<nav class="navbar">
     <ul>
         <li><a href="../../../index.php">Acceuil</a></li>
         <li><a href="../../../friends/friends.php">Messages</a></li>
