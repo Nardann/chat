@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['username'] = $user['username'];
         echo "Login successful";
-        echo "<p>Vous serez redirigé vers la page d'accueil dans <span id='countdown'>5</span> secondes.</p>";
+        echo "<p>Vous serez redirigé vers la page d'accueil dans <span id='countdown'>1</span> secondes.</p>";
         echo "<script>
                 var countdownValue = 5; // Initialiser le compte à rebours
                 var countdownElement = document.getElementById('countdown');
