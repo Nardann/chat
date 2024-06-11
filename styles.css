@@ -16,9 +16,13 @@ body {
 }
 
 .link_navbar {
-  padding-right: 1%;
-  color: white;
-  text-decoration: none;
+ padding-right: 1%;
+    padding-left: 1%;
+    color: white;
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+
 }
 
 .link_navbar:hover {
