@@ -4,4 +4,8 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
 }
+.navbar {
+  background: #57AE22;
+  width: 150%;
+  margin-left: -8px;
 }
