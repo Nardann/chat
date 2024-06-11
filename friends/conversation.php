@@ -66,8 +66,9 @@ $(document).ready(function() {
     setInterval(loadMessages, 5000);
 });
 document.addEventListener("DOMContentLoaded", function() {
-            window.scrollTo(0, document.body.scrollHeight);
-        });
+setTimeout(function() {
+                window.scrollTo(0, document.body.scrollHeight);
+            }, 200); /        });
 </script>
 
 <?php include('../includes/footer.php'); ?>
