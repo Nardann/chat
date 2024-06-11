@@ -34,14 +34,14 @@ padding: 20px;
 }
 
 
-.container {
+.container_index {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.boutons {
+.boutons_index {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
@@ -57,10 +57,10 @@ padding: 20px;
     transition: background-color 0.3s;
 }
 
-.bouton:hover {
+.bouton_index:hover {
     background-color: #57ae22; /* Couleur bleu turquoise foncé */
 }
 
-.bouton.inscription {
+.inscription {
     margin-right: 20px;
 }
