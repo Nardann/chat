@@ -17,9 +17,9 @@ include('includes/navbar.php');
     <br>
     <a href="friends/friend_requests.php">Friend Requests</a>
 <?php else: ?>
-    <div class="container">
+    <div class="container_index">
         <h1>Bienvenue !</h1>
-        <div class="boutons">
+        <div class="boutons_index">
             <a class="bouton_index" href="register/register.php">Register</a> | 
             <a class="bouton_index" href="login/login.php">Login</a>
         </div>
