@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sssss", $username, $name, $firstname, $email, $password);
 
     if ($stmt->execute()) {
-        header('Location: ' . $url, true, $permanent ? 301 : 302);
+        header("Location: ../login/login.php");
         exit();
 
     } else {
