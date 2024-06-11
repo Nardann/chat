@@ -17,9 +17,13 @@ include('includes/navbar.php');
     <br>
     <a href="friends/friend_requests.php">Friend Requests</a>
 <?php else: ?>
-    <h1>Welcome to our website</h1>
-    <a class="bouton_index" href="register/register.php">Register</a> | 
-    <a class="bouton_index" href="login/login.php">Login</a>
+    <div class="container">
+        <h1>Bienvenue !</h1>
+        <div class="boutons">
+            <a class="bouton_index" href="register/register.php">Register</a> | 
+            <a class="bouton_index" href="login/login.php">Login</a>
+        </div>
+    </div>
 <?php endif; ?>
 
 <?php include('includes/footer.php'); ?>
