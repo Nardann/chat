@@ -1,60 +1,117 @@
+<?php
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login/login.php");
+    exit();
+}
+
+$userId = $_SESSION['user_id'];
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signaling</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Appel Vidéo</title>
+    <style>
+        video {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
 </head>
 <body>
+    <h2>Appel Vidéo</h2>
+    <video id="localVideo" autoplay playsinline></video>
+    <video id="remoteVideo" autoplay playsinline></video>
+    <br>
+    <button id="startCall">Démarrer l'appel</button>
+    <button id="endCall">Terminer l'appel</button>
+    <input type="hidden" id="peerId" value="">
+
     <script>
-        function sendOffer(offer) {
-            $.post('./call_process.php', {
-                action: 'offer',
-                offer: offer
+        const userId = <?php echo $userId; ?>;
+        const peerIdInput = document.getElementById('peerId');
+
+        let localStream;
+        let remoteStream;
+        let peerConnection;
+
+        const startCallButton = document.getElementById('startCall');
+        const endCallButton = document.getElementById('endCall');
+        const localVideo = document.getElementById('localVideo');
+        const remoteVideo = document.getElementById('remoteVideo');
+
+        const servers = {
+            iceServers: [
+                { urls: 'stun:stun.l.google.com:19302' }
+            ]
+        };
+
+        startCallButton.onclick = async () => {
+            const peerId = prompt("Enter the peer ID to call:");
+            peerIdInput.value = peerId;
+            localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            localVideo.srcObject = localStream;
+
+            peerConnection = new RTCPeerConnection(servers);
+            peerConnection.addStream(localStream);
+
+            peerConnection.onaddstream = (event) => {
+                remoteVideo.srcObject = event.stream;
+            };
+
+            peerConnection.onicecandidate = (event) => {
+                if (event.candidate) {
+                    sendSignalingData('candidate', event.candidate);
+                }
+            };
+
+            const offer = await peerConnection.createOffer();
+            await peerConnection.setLocalDescription(offer);
+            sendSignalingData('offer', offer);
+
+            pollSignalingData('answer', async (data) => {
+                await peerConnection.setRemoteDescription(new RTCSessionDescription(data));
+            });
+
+            pollSignalingData('candidate', async (data) => {
+                await peerConnection.addIceCandidate(new RTCIceCandidate(data));
+            });
+        };
+
+        function sendSignalingData(action, data) {
+            fetch('./call_process.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `action=${action}&${action}=${JSON.stringify(data)}&peer_id=${peerIdInput.value}`
             });
         }
 
-        function sendAnswer(answer) {
-            $.post('./call_process.php', {
-                action: 'answer',
-                answer: answer
-            });
+        function pollSignalingData(type, callback) {
+            setInterval(async () => {
+                const response = await fetch('./call_process.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `action=get_${type}&peer_id=${userId}`
+                });
+                const data = await response.json();
+                if (data) {
+                    callback(data);
+                }
+            }, 1000);
         }
 
-        function sendCandidate(candidate) {
-            $.post('./call_process.php', {
-                action: 'candidate',
-                candidate: candidate
-            });
-        }
-
-        function getOffer(peerId) {
-            $.post('./call_process.php', {
-                action: 'get_offer',
-                peer_id: peerId
-            }, function(data) {
-                console.log('Received offer:', data);
-            });
-        }
-
-        function getAnswer(peerId) {
-            $.post('./call_process.php', {
-                action: 'get_answer',
-                peer_id: peerId
-            }, function(data) {
-                console.log('Received answer:', data);
-            });
-        }
-
-        function getCandidates(peerId) {
-            $.post('./call_process.php', {
-                action: 'get_candidates',
-                peer_id: peerId
-            }, function(data) {
-                console.log('Received candidates:', data);
-            });
-        }
+        endCallButton.onclick = () => {
+            peerConnection.close();
+            localStream.getTracks().forEach(track => track.stop());
+            remoteVideo.srcObject = null;
+        };
     </script>
 </body>
 </html>
