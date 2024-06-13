@@ -9,28 +9,28 @@
 <body>
     <script>
         function sendOffer(offer) {
-            $.post('path/to/your_php_file.php', {
+            $.post('./call_process.php', {
                 action: 'offer',
                 offer: offer
             });
         }
 
         function sendAnswer(answer) {
-            $.post('path/to/your_php_file.php', {
+            $.post('./call_process.php', {
                 action: 'answer',
                 answer: answer
             });
         }
 
         function sendCandidate(candidate) {
-            $.post('path/to/your_php_file.php', {
+            $.post('./call_process.php', {
                 action: 'candidate',
                 candidate: candidate
             });
         }
 
         function getOffer(peerId) {
-            $.post('path/to/your_php_file.php', {
+            $.post('./call_process.php', {
                 action: 'get_offer',
                 peer_id: peerId
             }, function(data) {
@@ -39,7 +39,7 @@
         }
 
         function getAnswer(peerId) {
-            $.post('path/to/your_php_file.php', {
+            $.post('./call_process.php', {
                 action: 'get_answer',
                 peer_id: peerId
             }, function(data) {
@@ -48,7 +48,7 @@
         }
 
         function getCandidates(peerId) {
-            $.post('path/to/your_php_file.php', {
+            $.post('./call_process.php', {
                 action: 'get_candidates',
                 peer_id: peerId
             }, function(data) {
