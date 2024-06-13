@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('../config/config.php');
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
@@ -9,10 +10,10 @@ if (!isset($_SESSION['user_id'])) {
 
 // Identifier l'utilisateur
 $userId = $_SESSION['user_id'];
-$action = isset($_POST['action']) ? $_POST['action'] : null;
+$action = $_POST['action'];
 
 // Définir le chemin du fichier de stockage
-$storagePath = '../data/signaling_data/'; // Assurez-vous que ce chemin est correct
+$storagePath = '../data/signaling_data/';
 
 // Assurez-vous que le répertoire de stockage existe
 if (!file_exists($storagePath)) {
@@ -42,28 +43,28 @@ function deleteData($file) {
 switch ($action) {
     case 'offer':
         $offer = $_POST['offer'];
-        writeData('offer_' . $userId, $offer);
+        writeData('offer_' . $userId . '.json', $offer);
         break;
     case 'answer':
         $answer = $_POST['answer'];
-        writeData('answer_' . $userId, $answer);
+        writeData('answer_' . $userId . '.json', $answer);
         break;
     case 'candidate':
         $candidate = $_POST['candidate'];
-        file_put_contents($storagePath . 'candidates_' . $userId, $candidate . PHP_EOL, FILE_APPEND);
+        file_put_contents($storagePath . 'candidates_' . $userId . '.json', $candidate . PHP_EOL, FILE_APPEND);
         break;
     case 'get_offer':
         $peerId = $_POST['peer_id'];
-        echo readData('offer_' . $peerId);
+        echo readData('offer_' . $peerId . '.json');
         break;
     case 'get_answer':
         $peerId = $_POST['peer_id'];
-        echo readData('answer_' . $peerId);
+        echo readData('answer_' . $peerId . '.json');
         break;
     case 'get_candidates':
         $peerId = $_POST['peer_id'];
-        echo readData('candidates_' . $peerId);
-        deleteData('candidates_' . $peerId); // Suppression des candidats après la lecture
+        echo readData('candidates_' . $peerId . '.json');
+        deleteData('candidates_' . $peerId . '.json'); // Suppression des candidats après la lecture
         break;
     default:
         echo 'Action non reconnue';
