@@ -66,10 +66,10 @@ $stmt->close();
             <?php if (empty($friends)): ?>
                 <p>Vous n'avez aucun ami.</p>
             <?php else: ?>
-                <?php foreach ($friends as $row): ?>
+                <?php while ($row = $result->fetch_assoc()) : ?>
                     <?php
-                    $friend_id = $row['id'];
-                    $friend_username = $row['username'];
+                        $friend_id = $row['id'];
+                        $friend_username = htmlspecialchars($row['username']);
                     ?>
                     <p>
                         <span><?php echo htmlspecialchars($friend_username); ?></span>
