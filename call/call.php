@@ -142,7 +142,7 @@ $stmt->close();
         }
 
         function sendSignalingData(action, data) {
-            fetch('signal.php', {
+            fetch('./call_process.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -153,7 +153,7 @@ $stmt->close();
 
         function pollSignalingData(type, callback) {
             setInterval(async () => {
-                const response = await fetch('signal.php', {
+                const response = await fetch('./call_process.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
