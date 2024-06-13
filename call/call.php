@@ -6,13 +6,35 @@ include('../config/config.php');
 $username = $_SESSION['username'];
 $userId = $_SESSION['user_id'];
 
-$sql = "SELECT username FROM users WHERE id = ?";
+$sql = "SELECT id FROM users WHERE username = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $friend_id);
+$stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
-$friend_username = $result->fetch_assoc()['username'];
-$stmt->close();
+$user = $result->fetch_assoc();
+$user_id = $user['id'];
+
+$sql = "SELECT users.id, users.username FROM friendships 
+        JOIN users ON friendships.friend_id = users.id 
+        WHERE friendships.user_id = ? AND friendships.status = 'accepted'
+        UNION
+        SELECT users.id, users.username FROM friendships 
+        JOIN users ON friendships.user_id = users.id 
+        WHERE friendships.friend_id = ? AND friendships.status = 'accepted'";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ii", $user_id, $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+echo "<h2>Your Friends</h2>";
+while ($row = $result->fetch_assoc()) {
+    $friend_id = $row['id'];
+    $friend_username = $row['username'];
+    echo "<form action='conversation.php' method='get'>";
+    echo "<input type='hidden' name='friend_id' value='$friend_id'>";
+    echo "<p>$friend_username <button type='submit'>Open Conversation</button></p>";
+    echo "</form>";
+}
 
 include('../includes/header.php');
 include('../includes/navbar.php');
