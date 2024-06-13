@@ -6,36 +6,12 @@ include('../config/config.php');
 $username = $_SESSION['username'];
 $userId = $_SESSION['user_id'];
 
-// Récupérer la liste des amis
-$sql = "SELECT users.id, users.username 
-        FROM friendships 
-        JOIN users ON friendships.friend_id = users.id 
-        WHERE friendships.user_id = ? AND friendships.status = 'accepted'
-        UNION
-        SELECT users.id, users.username 
-        FROM friendships 
-        JOIN users ON friendships.user_id = users.id 
-        WHERE friendships.friend_id = ? AND friendships.status = 'accepted'";
-
+$sql = "SELECT username FROM users WHERE id = ?";
 $stmt = $conn->prepare($sql);
-if ($stmt === false) {
-    die('Prepare failed: ' . htmlspecialchars($conn->error));
-}
-
-$stmt->bind_param("ii", $userId, $userId);
-if (!$stmt->execute()) {
-    die('Execute failed: ' . htmlspecialchars($stmt->error));
-}
-
+$stmt->bind_param("i", $friend_id);
+$stmt->execute();
 $result = $stmt->get_result();
-if ($result === false) {
-    die('Get result failed: ' . htmlspecialchars($stmt->error));
-}
-
-$friends = [];
-while ($row = $result->fetch_assoc()) {
-    $friends[] = $row;
-}
+$friend_username = $result->fetch_assoc()['username'];
 $stmt->close();
 
 include('../includes/header.php');
