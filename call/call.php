@@ -26,15 +26,6 @@ $stmt->bind_param("ii", $user_id, $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-echo "<h2>Your Friends</h2>";
-while ($row = $result->fetch_assoc()) {
-    $friend_id = $row['id'];
-    $friend_username = $row['username'];
-    echo "<form action='conversation.php' method='get'>";
-    echo "<input type='hidden' name='friend_id' value='$friend_id'>";
-    echo "<p>$friend_username <button type='submit'>Open Conversation</button></p>";
-    echo "</form>";
-}
 
 include('../includes/header.php');
 include('../includes/navbar.php');
@@ -58,18 +49,23 @@ include('../includes/navbar.php');
     <h2>Appel Vidéo</h2>
 
     <div id="friendsList">
-        <h3>Liste de vos amis</h3>
-        <?php if (empty($friends)): ?>
-            <p>Vous n'avez aucun ami.</p>
-        <?php else: ?>
-            <?php foreach ($friends as $friend): ?>
-                <p>
-                    <span><?php echo htmlspecialchars($friend['username']); ?></span>
-                    <button onclick="startCallWithFriend(<?php echo $friend['id']; ?>, '<?php echo htmlspecialchars($friend['username']); ?>')">Appeler</button>
-                </p>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </div>
+            <h3>Liste de vos amis</h3>
+            <?php if (empty($friends)): ?>
+                <p>Vous n'avez aucun ami.</p>
+            <?php else: ?>
+                <?php foreach ($friends as $row): ?>
+                    <?php
+                    $friend_id = $row['id'];
+                    $friend_username = $row['username'];
+                    ?>
+                    <p>
+                        <span><?php echo htmlspecialchars($friend_username); ?></span>
+                        <button onclick="startCallWithFriend(<?php echo $friend_id; ?>, '<?php echo htmlspecialchars($friend_username); ?>')">Appeler</button>
+                    </p>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+
 
     <video id="localVideo" autoplay playsinline></video>
     <video id="remoteVideo" autoplay playsinline></video>
