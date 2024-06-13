@@ -1,10 +1,13 @@
 <?php
 include('../includes/auth.php');
 redirectIfNotLoggedIn();
-
 include('../config/config.php');
 
+$username = $_SESSION['username'];
 $userId = $_SESSION['user_id'];
+
+include('../includes/header.php');
+include('../includes/navbar.php');
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +31,7 @@ $userId = $_SESSION['user_id'];
     <input type="hidden" id="peerId" value="">
 
     <script>
-        const userId = <?php echo $userId; ?>;
+        const userId = <?php echo $_SESSION['user_id']; ?>;
         const peerIdInput = document.getElementById('peerId');
 
         let localStream;
@@ -79,7 +82,7 @@ $userId = $_SESSION['user_id'];
         };
 
         function sendSignalingData(action, data) {
-            fetch('./call_process.php', {
+            fetch('signal.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -90,7 +93,7 @@ $userId = $_SESSION['user_id'];
 
         function pollSignalingData(type, callback) {
             setInterval(async () => {
-                const response = await fetch('./call_process.php', {
+                const response = await fetch('signal.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -112,3 +115,5 @@ $userId = $_SESSION['user_id'];
     </script>
 </body>
 </html>
+
+<?php include('../includes/footer.php'); ?>
