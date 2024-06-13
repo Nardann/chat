@@ -31,10 +31,12 @@ $result = $stmt->get_result();
 echo "<h2>Your Friends</h2>";
 while ($row = $result->fetch_assoc()) {
     $friend_id = $row['id'];
-    $friend_username = $row['username'];
+    $friend_username = htmlspecialchars($row['username']); // Échappement du nom d'utilisateur
+
     echo "<input type='hidden' name='friend_id' value='$friend_id'>";
-    echo "<p>$friend_username <button onclick="startCallWithFriend(<?php echo $friend_id; ?>, '<?php echo htmlspecialchars($friend_username); ?>')">Appeler</button>";
+    echo "<p>$friend_username <button onclick=\"startCallWithFriend($friend_id, '$friend_username')\">Appeler</button></p>";
 }
+
 
 $stmt->close();
 
