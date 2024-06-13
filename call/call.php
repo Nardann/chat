@@ -82,7 +82,7 @@ include('../includes/navbar.php');
         };
 
         function sendSignalingData(action, data) {
-            fetch('signal.php', {
+            fetch('call_process.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -93,7 +93,7 @@ include('../includes/navbar.php');
 
         function pollSignalingData(type, callback) {
             setInterval(async () => {
-                const response = await fetch('signal.php', {
+                const response = await fetch('call_process.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
