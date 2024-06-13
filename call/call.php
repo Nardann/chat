@@ -2,7 +2,8 @@
 include('../includes/auth.php');
 redirectIfNotLoggedIn();
 include('../config/config.php');
-
+include('../includes/header.php');
+include('../includes/navbar.php');
 $username = $_SESSION['username'];
 $userId = $_SESSION['user_id'];
 
@@ -40,8 +41,7 @@ while ($row = $result->fetch_assoc()) {
 $stmt->close();
 
 
-include('../includes/header.php');
-include('../includes/navbar.php');
+
 ?>
 
 <!DOCTYPE html>
