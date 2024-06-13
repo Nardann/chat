@@ -1,11 +1,8 @@
 <?php
-session_start();
+include('../includes/auth.php');
+redirectIfNotLoggedIn();
 
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../login/login.php");
-    exit();
-}
+include('../config/config.php');
 
 $userId = $_SESSION['user_id'];
 ?>
