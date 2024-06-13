@@ -6,6 +6,7 @@ include('../config/config.php');
 $username = $_SESSION['username'];
 $userId = $_SESSION['user_id'];
 
+$username = $_SESSION['username'];
 $sql = "SELECT id FROM users WHERE username = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $username);
@@ -25,6 +26,18 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("ii", $user_id, $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
+
+echo "<h2>Your Friends</h2>";
+while ($row = $result->fetch_assoc()) {
+    $friend_id = $row['id'];
+    $friend_username = $row['username'];
+    echo "<form action='conversation.php' method='get'>";
+    echo "<input type='hidden' name='friend_id' value='$friend_id'>";
+    echo "<p>$friend_username <button type='submit'>Open Conversation</button></p>";
+    echo "</form>";
+}
+
+$stmt->close();
 
 
 include('../includes/header.php');
