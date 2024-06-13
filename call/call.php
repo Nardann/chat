@@ -7,17 +7,31 @@ $username = $_SESSION['username'];
 $userId = $_SESSION['user_id'];
 
 // Récupérer la liste des amis
-$sql = "SELECT users.id, users.username FROM friendships 
+$sql = "SELECT users.id, users.username 
+        FROM friendships 
         JOIN users ON friendships.friend_id = users.id 
         WHERE friendships.user_id = ? AND friendships.status = 'accepted'
         UNION
-        SELECT users.id, users.username FROM friendships 
+        SELECT users.id, users.username 
+        FROM friendships 
         JOIN users ON friendships.user_id = users.id 
         WHERE friendships.friend_id = ? AND friendships.status = 'accepted'";
+
 $stmt = $conn->prepare($sql);
+if ($stmt === false) {
+    die('Prepare failed: ' . htmlspecialchars($conn->error));
+}
+
 $stmt->bind_param("ii", $userId, $userId);
-$stmt->execute();
+if (!$stmt->execute()) {
+    die('Execute failed: ' . htmlspecialchars($stmt->error));
+}
+
 $result = $stmt->get_result();
+if ($result === false) {
+    die('Get result failed: ' . htmlspecialchars($stmt->error));
+}
+
 $friends = [];
 while ($row = $result->fetch_assoc()) {
     $friends[] = $row;
@@ -47,12 +61,16 @@ include('../includes/navbar.php');
 
     <div id="friendsList">
         <h3>Liste de vos amis</h3>
-        <?php foreach ($friends as $friend): ?>
-            <p>
-                <span><?php echo htmlspecialchars($friend['username']); ?></span>
-                <button onclick="startCallWithFriend(<?php echo $friend['id']; ?>, '<?php echo htmlspecialchars($friend['username']); ?>')">Appeler</button>
-            </p>
-        <?php endforeach; ?>
+        <?php if (empty($friends)): ?>
+            <p>Vous n'avez aucun ami.</p>
+        <?php else: ?>
+            <?php foreach ($friends as $friend): ?>
+                <p>
+                    <span><?php echo htmlspecialchars($friend['username']); ?></span>
+                    <button onclick="startCallWithFriend(<?php echo $friend['id']; ?>, '<?php echo htmlspecialchars($friend['username']); ?>')">Appeler</button>
+                </p>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 
     <video id="localVideo" autoplay playsinline></video>
