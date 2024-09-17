@@ -9,3 +9,5 @@
                 <a class="nav-link" href="../../../friends/friend_requests.php">Demande d'amis</a>
             </div>
         </nav>
+        <div class="col-10">
+            <div class="content">
