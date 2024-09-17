@@ -1,8 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex flex-column vh-100">
     <div class="container-fluid">
-        <!-- Contenu de la navbar aligné à gauche -->
         <div class="navbar-collapse">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="../../../index.php">Accueil</a>
                 </li>
@@ -20,3 +19,4 @@
     </div>
 </nav>
 <div class="space"></div>
+
