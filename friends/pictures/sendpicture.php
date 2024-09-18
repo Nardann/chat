@@ -88,7 +88,7 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
         // Ajouter le nouveau message à la conversation
         $conversation[] = [
             'sender' => $user1,
-            'picture' => $message,
+            'content' => $message,
             'timestamp' => time()
         ];
 
