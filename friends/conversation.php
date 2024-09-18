@@ -50,18 +50,8 @@ $.ajax({
             var sender = message.sender === '<?php echo $user1; ?>' ? 'You' : '<?php echo $friend_username; ?>';
              // Convertir le timestamp en objet Date
             var date = new Date(message.timestamp * 1000); // Convertir en millisecondes
-            
-            // Extraire les parties de la date
-            var hours = date.getHours().toString().padStart(2, '0');
-            var minutes = date.getMinutes().toString().padStart(2, '0');
-            var day = date.getDate().toString().padStart(2, '0');
-            var month = (date.getMonth() + 1).toString().padStart(2, '0'); // Les mois sont indexés à partir de 0
-            var year = date.getFullYear();
-            
-            // Formater la date et l'heure
-            var formattedDate = day + '/' + month + '/' + year;
-            var formattedTime = hours + ':' + minutes;
-            $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + formattedTime</p>');
+
+            $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + date</p>');
         });
     }
     });
