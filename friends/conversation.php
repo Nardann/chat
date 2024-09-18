@@ -40,17 +40,18 @@ $stmt->close();
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 function loadMessages() {
-    $.ajax({
-        url: 'get_messages.php',
-        type: 'GET',
-        data: { friend_id: '<?php echo $friend_id; ?>' },
-        success: function(data) {
-            $('#messages').empty();
-            data.forEach(function(message) {
-                var sender = message.sender === '<?php echo $user1; ?>' ? 'You' : '<?php echo $friend_username; ?>';
-                $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + '</p>');
-            });
-        }
+$.ajax({
+    url: 'get_messages.php',
+    type: 'GET',
+    data: { friend_id: '<?php echo $friend_id; ?>' },
+    success: function(data) {
+        $('#messages').empty();
+        data.forEach(function(message) {
+            var sender = message.sender === '<?php echo $user1; ?>' ? 'You' : '<?php echo $friend_username; ?>';
+            var time = new Date(message.timestamp * 1000).toLocaleTimeString(); // Convertir le timestamp en heure locale
+            $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + ' <em>(' + time + ')</em></p>');
+        });
+    }
     });
 }
 
