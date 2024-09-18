@@ -13,7 +13,7 @@
                     </li>
                     <li>
                         <a href="../../../friends/friends.php" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Amis</span></a>
+                            <i class="bi bi-person-lines-fill"></i> <span class="ms-1 d-none d-sm-inline">Amis</span></a>
                     </li>
                     <li>
                         <a href="../../../friends/search.php" class="nav-link px-0 align-middle">
