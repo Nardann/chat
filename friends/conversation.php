@@ -30,6 +30,11 @@ $stmt->close();
     <textarea name="message" rows="4" cols="50" required></textarea><br>
     <input type="submit" value="Send">
 </form>
+<form action="./pictures/sendpicture.php" method="post" enctype="multipart/form-data">
+    <label for="fileUpload">Choisir une image à uploader :</label>
+    <input type="file" name="fileUpload" id="fileUpload">
+    <input type="submit" value="Uploader l'image">
+</form>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
