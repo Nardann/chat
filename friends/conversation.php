@@ -48,7 +48,7 @@ $.ajax({
         $('#messages').empty();
         data.forEach(function(message) {
             var sender = message.sender === '<?php echo $user1; ?>' ? 'You' : '<?php echo $friend_username; ?>';
-            var time = new Date(message.timestamp * 1000).toLocaleTimeString(); // Convertir le timestamp en heure locale
+            var time = message.formatted_timestamp 
             $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + ' <em>(' + time + ')</em></p>');
         });
     }
