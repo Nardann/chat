@@ -30,6 +30,9 @@ include('../includes/header.php');
             </div>
             <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
         </form>
+        <div class="text-center mt-3">
+            <p>Vous n'avez pas de compte ? <a href="register.php">Inscrivez-vous ici</a>.</p>
+        </div>
     </div>
 </div>
 <?php include('../includes/footer.php'); ?>
