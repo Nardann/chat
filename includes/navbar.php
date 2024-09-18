@@ -13,11 +13,15 @@
                     </li>
                     <li>
                         <a href="../../../friends/friends.php" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Friends</span></a>
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Amis</span></a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+                        <a href="../../../friends/search.php" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Ajouter un amis</span></a>
+                    </li>
+                    <li>
+                        <a href="../../../friends/friend_requests.php" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Demande d'amis</span></a>
                     </li>
                 </ul>
                 <hr>
