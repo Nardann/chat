@@ -21,7 +21,7 @@
                     </li>
                     <li>
                         <a href="../../../friends/friend_requests.php" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Demande d'amis</span></a>
+                            <i class="bi bi-person-arms-up"></i> <span class="ms-1 d-none d-sm-inline">Demande d'amis</span></a>
                     </li>
                 </ul>
                 <hr>
