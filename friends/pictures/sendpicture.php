@@ -11,7 +11,7 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
     // Définir le chemin de stockage
     $uploadDir = '../../data/pictures/';
     if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0755, true); // Créer le dossier si nécessaire 
+        mkdir($uploadDir, 0755, true); // Créer le dossier si nécessaire
     }
 
     // Créer un nouveau nom de fichier unique pour éviter les conflits
@@ -19,18 +19,19 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
     $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
     $destPath = $uploadDir . $newFileName;
 
-    // Compresser l'image (pour JPEG)
+    // Compresser l'image (pour JPEG et PNG)
     if ($fileType === 'image/jpeg' || $fileType === 'image/jpg') {
         $image = imagecreatefromjpeg($fileTmpPath);
         imagejpeg($image, $destPath, 75); // 75 = compression
+        imagedestroy($image);
     } elseif ($fileType === 'image/png') {
         $image = imagecreatefrompng($fileTmpPath);
         imagepng($image, $destPath, 6); // Compression pour PNG
+        imagedestroy($image);
     } else {
         echo "Format de fichier non supporté.";
         exit();
     }
-    imagedestroy($image);
 
     // Générer un lien chiffré pour accéder à l'image
     $encryptedLink = generateEncryptedLink($newFileName);
@@ -41,7 +42,7 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
     
         // Récupérer les données du formulaire
         $friend_id = $_POST['friend_id'];
-        $message = "https://chat.nardann.xyz/friends/pictures/"+$encryptedLink;
+        $message = "https://chat.nardann.xyz/friends/pictures/" . $encryptedLink;
     
         // Récupérer les noms d'utilisateur
         $user1 = $_SESSION['username'];
@@ -83,7 +84,7 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
 // Fonction pour générer un lien chiffré
 function generateEncryptedLink($fileName) {
     $secretKey = 'nardann_chat>facebook'; // Utilise une clé secrète pour le chiffrement
-    $encryptedFileName = openssl_encrypt($fileName, 'AES-128-ECB', $secretKey);
+    $encryptedFileName = openssl_encrypt($fileName, 'AES-128-ECB', $secretKey, 0, str_repeat(' ', 16)); // Ajouter un IV pour AES
     return "access_image.php?img=" . urlencode($encryptedFileName);
 }
 ?>
