@@ -1,7 +1,6 @@
 <?php
 include('../../config/config.php');
 
-// Vérifier si un fichier a été uploadé
 if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
     
     // Obtenir les informations du fichier
@@ -42,6 +41,8 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
 
     // Afficher le lien chiffré à l'utilisateur
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_id'])) {
+        include('../config/config.php');
+
         // Vérifier si friend_id est défini et non vide
         if (empty($_POST['friend_id'])) {
             echo "Error: friend_id is missing.";
@@ -93,9 +94,15 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
             'timestamp' => time()
         ];
 
+        // Debugging: Vérifier le contenu avant d'écrire
+        $jsonData = json_encode($conversation);
+        if ($jsonData === false) {
+            die("Erreur lors de l'encodage JSON: " . json_last_error_msg());
+        }
+
         // Enregistrer la conversation mise à jour dans le fichier JSON
-        if (file_put_contents($conversation_file, json_encode($conversation)) === false) {
-            echo "Error: Unable to write to conversation file.";
+        if (file_put_contents($conversation_file, $jsonData) === false) {
+            echo "Error: Unable to write to conversation file. Check file permissions.";
             exit();
         }
 
