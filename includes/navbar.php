@@ -17,7 +17,7 @@
                     </li>
                     <li>
                         <a href="../../../friends/search.php" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Ajouter un amis</span></a>
+                            <i class="bi bi-person-plus"></i><span class="ms-1 d-none d-sm-inline">Ajouter un amis</span></a>
                     </li>
                     <li>
                         <a href="../../../friends/friend_requests.php" class="nav-link px-0 align-middle">
