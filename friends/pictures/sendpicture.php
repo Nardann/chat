@@ -11,7 +11,7 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
     // Définir le chemin de stockage
     $uploadDir = '../../data/pictures/';
     if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0755, true); // Créer le dossier si nécessaire
+        mkdir($uploadDir, 0755, true); // Créer le dossier si nécessaire 
     }
 
     // Créer un nouveau nom de fichier unique pour éviter les conflits
