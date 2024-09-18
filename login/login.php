@@ -7,13 +7,15 @@ redirectIfLoggedIn();
 include('../includes/header.php'); 
 ?>
 
-<form action="login_process.php" method="POST">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <br>
-    <button type="submit">Login</button>
+<form>
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+    <button class="btn btn-primary" type="submit">Login</button>
 </form>
 <?php include('../includes/footer.php'); ?>
