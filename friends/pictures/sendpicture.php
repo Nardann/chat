@@ -122,3 +122,4 @@ function generateEncryptedLink($fileName) {
     return "access_image.php?img=" . urlencode($encryptedFileName);
 }
 ?>
+
