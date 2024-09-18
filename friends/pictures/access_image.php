@@ -7,7 +7,7 @@ if (isset($_GET['img'])) {
     $decryptedFileName = openssl_decrypt(urldecode($encryptedFileName), 'AES-128-ECB', $secretKey);
 
     // Vérifier si le fichier existe et afficher l'image
-    $filePath = 'data/pictures/' . $decryptedFileName;
+    $filePath = '../../data/pictures/' . $decryptedFileName;
     if (file_exists($filePath)) {
         header('Content-Type: image/jpeg');
         readfile($filePath);
