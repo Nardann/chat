@@ -9,7 +9,7 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
     $fileType = $_FILES['fileUpload']['type'];
     
     // Définir le chemin de stockage
-    $uploadDir = '../../../data/pictures/';
+    $uploadDir = '../../data/pictures/';
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0755, true); // Créer le dossier si nécessaire
     }
