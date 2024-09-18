@@ -1,4 +1,5 @@
 <?php
+include('../../config/config.php');
 // Vérifier si un fichier a été uploadé
 if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
     
@@ -38,7 +39,7 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
 
     // Afficher le lien chiffré à l'utilisateur
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_id'])) {
-        include('../config/config.php');
+        
 
         // Vérifier si friend_id est défini et non vide
         if (empty($_POST['friend_id'])) {
