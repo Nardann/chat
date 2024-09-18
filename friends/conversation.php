@@ -51,7 +51,7 @@ $.ajax({
              // Convertir le timestamp en objet Date
             var date = new Date(message.timestamp * 1000); // Convertir en millisecondes
 
-            $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + date</p>');
+            $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + message.date</p>');
         });
     }
     });
