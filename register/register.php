@@ -31,7 +31,7 @@ include('../includes/header.php');
             <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
         </form>
         <div class="text-center mt-3">
-            <p>Vous n'avez pas de compte ? <a href="register.php">Inscrivez-vous ici</a>.</p>
+            <p>Vous avez déjà un compte ? <a href="../../login/login.php">Connectez-vous ici</a>.</p>
         </div>
     </div>
 </div>
