@@ -33,7 +33,7 @@ while ($row = $result->fetch_assoc()) {
     $friend_username = $row['username'];
     echo "<form action='conversation.php' method='get'>";
     echo "<input type='hidden' name='friend_id' value='$friend_id'>";
-    echo "<p>$friend_username <button type='submit'><i class="bi bi-chat-left-dots"></i></button></p>";
+    echo "<p>$friend_username <button type='submit'><i class='bi bi-chat-left-dots'></i></button></p>";
     echo "</form>";
 }
 
