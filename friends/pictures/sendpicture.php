@@ -39,13 +39,24 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
     // Afficher le lien chiffré à l'utilisateur
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_id'])) {
         include('../config/config.php');
-    
+
+        // Vérifier si friend_id est défini et non vide
+        if (empty($_POST['friend_id'])) {
+            echo "Error: friend_id is missing.";
+            exit();
+        }
+
         // Récupérer les données du formulaire
         $friend_id = $_POST['friend_id'];
         $message = "https://chat.nardann.xyz/friends/pictures/" . $encryptedLink;
-    
+
         // Récupérer les noms d'utilisateur
         $user1 = $_SESSION['username'];
+        if (!isset($conn)) {
+            echo "Error: Database connection is not established.";
+            exit();
+        }
+
         $sql = "SELECT username FROM users WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $friend_id);
@@ -53,32 +64,40 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
         $result = $stmt->get_result();
         $friend_username = $result->fetch_assoc()['username'];
         $stmt->close();
-    
+
+        if (!$friend_username) {
+            echo "Error: Friend username not found.";
+            exit();
+        }
+
         // Construire le nom du fichier de conversation de manière déterministe
         $conversation_file = "../data/messages/friend/" . (strcmp($user1, $friend_username) < 0 ? "{$user1}-{$friend_username}.json" : "{$friend_username}-{$user1}.json");
-    
+
         // Charger les messages existants ou initialiser un tableau vide
         $conversation = file_exists($conversation_file) ? json_decode(file_get_contents($conversation_file), true) : [];
-    
+
         // Ajouter le nouveau message à la conversation
         $conversation[] = [
             'sender' => $user1,
             'picture' => $message,
             'timestamp' => time()
         ];
-    
+
         // Enregistrer la conversation mise à jour dans le fichier JSON
-        file_put_contents($conversation_file, json_encode($conversation));
-    
+        if (file_put_contents($conversation_file, json_encode($conversation)) === false) {
+            echo "Error: Unable to write to conversation file.";
+            exit();
+        }
+
         // Rediriger vers la page de conversation
         header("Location: conversation.php?friend_id=$friend_id");
         exit();
     } else {
-        echo "Error: Invalid request.";
+        echo "Error: Invalid request. Please ensure the form is submitted correctly.";
     }
 
 } else {
-    echo "Erreur lors de l'upload.";
+    echo "Erreur lors de l'upload. Vérifiez le fichier ou le formulaire.";
 }
 
 // Fonction pour générer un lien chiffré
