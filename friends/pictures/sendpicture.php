@@ -53,11 +53,6 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
 
         // Récupérer les noms d'utilisateur
         $user1 = $_SESSION['username'];
-        if (!isset($conn)) {
-            echo "Error: Database connection is not established.";
-            exit();
-        }
-
         $sql = "SELECT username FROM users WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $friend_id);
@@ -65,56 +60,31 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
         $result = $stmt->get_result();
         $friend_username = $result->fetch_assoc()['username'];
         $stmt->close();
-
-        if (!$friend_username) {
-            echo "Error: Friend username not found.";
-            exit();
-        }
-
+    
         // Construire le nom du fichier de conversation de manière déterministe
         $conversation_file = "../data/messages/friend/" . (strcmp($user1, $friend_username) < 0 ? "{$user1}-{$friend_username}.json" : "{$friend_username}-{$user1}.json");
-
-        // Assurer que le répertoire pour les fichiers de conversation existe
-        $conversationDir = dirname($conversation_file);
-        if (!is_dir($conversationDir)) {
-            if (!mkdir($conversationDir, 0755, true)) {
-                die("Erreur lors de la création du répertoire de conversation.");
-            }
-        }
-
+    
         // Charger les messages existants ou initialiser un tableau vide
         $conversation = file_exists($conversation_file) ? json_decode(file_get_contents($conversation_file), true) : [];
-
+    
         // Ajouter le nouveau message à la conversation
         $conversation[] = [
             'sender' => $user1,
             'content' => $message,
             'timestamp' => time()
         ];
-
-        // Debugging: Vérifier le contenu avant d'écrire
-        $jsonData = json_encode($conversation);
-        if ($jsonData === false) {
-            die("Erreur lors de l'encodage JSON: " . json_last_error_msg());
-        }
-
+    
         // Enregistrer la conversation mise à jour dans le fichier JSON
-        if (file_put_contents($conversation_file, $jsonData) === false) {
-            echo "Error: Unable to write to conversation file. Check file permissions.";
-            exit();
-        }
-
+        file_put_contents($conversation_file, json_encode($conversation));
+    
         // Rediriger vers la page de conversation
-        header("Location: ../conversation.php?friend_id=$friend_id");
+        header("Location: conversation.php?friend_id=$friend_id");
         exit();
     } else {
-        echo "Error: Invalid request. Please ensure the form is submitted correctly.";
+        echo "Error: Invalid request.";
     }
 
-} else {
-    echo "Erreur lors de l'upload. Vérifiez le fichier ou le formulaire.";
 }
-
 // Fonction pour générer un lien chiffré
 function generateEncryptedLink($fileName) {
     $secretKey = 'nardann_chat>facebook'; // Utilise une clé secrète pour le chiffrement
