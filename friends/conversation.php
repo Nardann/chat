@@ -47,9 +47,8 @@ $.ajax({
     success: function(data) {
         $('#messages').empty();
         data.forEach(function(message) {
-            var sender = message.sender === '<?php echo $user1; ?>' ? 'You' : '<?php echo $friend_username; ?>';
-
-            $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content</p>');
+                var sender = message.sender === '<?php echo $user1; ?>' ? 'You' : '<?php echo $friend_username; ?>';
+                $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + '</p>');
         });
     }
     });
