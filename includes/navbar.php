@@ -1,33 +1,44 @@
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline"><i class="bi bi-chat-dots"></i> Chat</span>
-                </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
-                        <a href="../../../index.php" class="nav-link align-middle px-0">
-                            <span class="ms-1 d-none d-sm-inline"><i class="bi bi-house"></i> Home</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../../../friends/friends.php" class="nav-link px-0 align-middle">
-                            <i class="bi bi-person-lines-fill"></i> <span class="ms-1 d-none d-sm-inline">Amis</span></a>
-                    </li>
-                    <li>
-                        <a href="../../../friends/search.php" class="nav-link px-0 align-middle">
-                            <i class="bi bi-person-plus"></i> <span class="ms-1 d-none d-sm-inline">Ajouter un amis</span></a>
-                    </li>
-                    <li>
-                        <a href="../../../friends/friend_requests.php" class="nav-link px-0 align-middle">
-                            <i class="bi bi-person-arms-up"></i> <span class="ms-1 d-none d-sm-inline">Demande d'amis</span></a>
-                    </li>
-                </ul>
-                <hr>
-                <div class="dropdown pb-4">
+            <div class="d-flex flex-column justify-content-between text-white min-vh-100">
+                
+                <!-- Titre "Chat" en haut -->
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2">
+                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline"><i class="bi bi-chat-dots"></i> Chat</span>
+                    </a>
+                </div>
+                
+                <!-- Liste des éléments centrée verticalement -->
+                <div class="d-flex flex-column align-items-center align-items-sm-start flex-grow-1 justify-content-center px-3">
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li class="nav-item">
+                            <a href="../../../index.php" class="nav-link align-middle px-0">
+                                <span class="ms-1 d-none d-sm-inline"><i class="bi bi-house"></i> Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../../../friends/friends.php" class="nav-link px-0 align-middle">
+                                <i class="bi bi-person-lines-fill"></i> <span class="ms-1 d-none d-sm-inline">Amis</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../../../friends/search.php" class="nav-link px-0 align-middle">
+                                <i class="bi bi-person-plus"></i> <span class="ms-1 d-none d-sm-inline">Ajouter un ami</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../../../friends/friend_requests.php" class="nav-link px-0 align-middle">
+                                <i class="bi bi-person-arms-up"></i> <span class="ms-1 d-none d-sm-inline">Demande d'amis</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Profil en bas -->
+                <div class="dropdown pb-4 px-3">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <!--<img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">-->
                         <i class="bi bi-person-bounding-box"></i>
                         <span class="d-none d-sm-inline mx-1"><?php echo $_SESSION['username']; ?></span>
                     </a>
@@ -42,4 +53,6 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Contenu principal -->
         <div class="col py-3">
