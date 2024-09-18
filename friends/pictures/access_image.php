@@ -1,7 +1,7 @@
 <?php
 if (isset($_GET['img'])) {
     $encryptedFileName = $_GET['img'];
-    $secretKey = 'my_secret_key'; // Utilise la même clé secrète
+    $secretKey = 'nardann_chat>facebook'; // Utilise la même clé secrète
 
     // Déchiffrer le nom du fichier
     $decryptedFileName = openssl_decrypt(urldecode($encryptedFileName), 'AES-128-ECB', $secretKey);
