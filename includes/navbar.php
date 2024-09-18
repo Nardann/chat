@@ -9,9 +9,9 @@
                         <span class="fs-5 d-none d-sm-inline"><i class="bi bi-chat-dots"></i> Chat</span>
                     </a>
                 </div>
-                
+
                 <!-- Liste des éléments centrée verticalement -->
-                <div class="d-flex flex-column align-items-center align-items-sm-start flex-grow-1 justify-content-center px-3">
+                <div class="d-flex flex-column flex-grow-1 justify-content-center align-items-center">
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
                             <a href="../../../index.php" class="nav-link align-middle px-0">
