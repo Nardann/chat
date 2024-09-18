@@ -100,7 +100,7 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
         }
 
         // Rediriger vers la page de conversation
-        header("Location: conversation.php?friend_id=$friend_id");
+        header("Location: ../conversation.php?friend_id=$friend_id");
         exit();
     } else {
         echo "Error: Invalid request. Please ensure the form is submitted correctly.";
