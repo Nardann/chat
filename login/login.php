@@ -9,7 +9,7 @@ include('../includes/header.php');
 
 <div class="d-flex justify-content-center align-items-center vh-100">
     <div class="col-12 col-md-6 bg-light p-4 rounded shadow">
-        <form>
+        <form action="login_process.php" method="POST">
             <div class="form-group mb-3">
                 <label for="username">Nom d'utilisateur:</label>
                 <input type="text" class="form-control" id="username" name="username" required>
