@@ -31,6 +31,7 @@ $stmt->close();
     <input type="submit" value="Send">
 </form>
 <form action="./pictures/sendpicture.php" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
     <label for="fileUpload">Choisir une image à uploader :</label>
     <input type="file" name="fileUpload" id="fileUpload">
     <input type="submit" value="Uploader l'image">
