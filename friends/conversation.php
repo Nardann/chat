@@ -48,10 +48,8 @@ $.ajax({
         $('#messages').empty();
         data.forEach(function(message) {
             var sender = message.sender === '<?php echo $user1; ?>' ? 'You' : '<?php echo $friend_username; ?>';
-             // Convertir le timestamp en objet Date
-            var date = new Date(message.timestamp * 1000); // Convertir en millisecondes
 
-            $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + message.date</p>');
+            $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content</p>');
         });
     }
     });
