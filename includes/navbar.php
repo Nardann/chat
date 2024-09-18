@@ -8,7 +8,7 @@
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
                         <a href="../../../index.php" class="nav-link align-middle px-0">
-                            <span class="ms-1 d-none d-sm-inline">Home</span>
+                            <span class="ms-1 d-none d-sm-inline"><i class="bi bi-chat-dots"></i>Home</span>
                         </a>
                     </li>
                     <li>
