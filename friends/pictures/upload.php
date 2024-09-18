@@ -43,7 +43,7 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
 
 // Fonction pour générer un lien chiffré
 function generateEncryptedLink($fileName) {
-    $secretKey = 'my_secret_key'; // Utilise une clé secrète pour le chiffrement
+    $secretKey = 'nardann_chat>facebook'; // Utilise une clé secrète pour le chiffrement
     $encryptedFileName = openssl_encrypt($fileName, 'AES-128-ECB', $secretKey);
     return "access_image.php?img=" . urlencode($encryptedFileName);
 }
