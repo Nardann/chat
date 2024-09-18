@@ -1,5 +1,6 @@
 <?php
 include('../../config/config.php');
+
 // Vérifier si un fichier a été uploadé
 if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
     
@@ -12,7 +13,9 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
     // Définir le chemin de stockage
     $uploadDir = '../../data/pictures/';
     if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0755, true); // Créer le dossier si nécessaire
+        if (!mkdir($uploadDir, 0755, true)) {
+            die("Erreur lors de la création du répertoire de téléchargement.");
+        }
     }
 
     // Créer un nouveau nom de fichier unique pour éviter les conflits
@@ -39,8 +42,6 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
 
     // Afficher le lien chiffré à l'utilisateur
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['friend_id'])) {
-        
-
         // Vérifier si friend_id est défini et non vide
         if (empty($_POST['friend_id'])) {
             echo "Error: friend_id is missing.";
@@ -73,6 +74,14 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
 
         // Construire le nom du fichier de conversation de manière déterministe
         $conversation_file = "../data/messages/friend/" . (strcmp($user1, $friend_username) < 0 ? "{$user1}-{$friend_username}.json" : "{$friend_username}-{$user1}.json");
+
+        // Assurer que le répertoire pour les fichiers de conversation existe
+        $conversationDir = dirname($conversation_file);
+        if (!is_dir($conversationDir)) {
+            if (!mkdir($conversationDir, 0755, true)) {
+                die("Erreur lors de la création du répertoire de conversation.");
+            }
+        }
 
         // Charger les messages existants ou initialiser un tableau vide
         $conversation = file_exists($conversation_file) ? json_decode(file_get_contents($conversation_file), true) : [];
