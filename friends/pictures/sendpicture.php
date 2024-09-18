@@ -41,7 +41,7 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
     
         // Récupérer les données du formulaire
         $friend_id = $_POST['friend_id'];
-        $message = "https://"+$encryptedLink;
+        $message = "https://chat.nardann.xyz/friends/pictures/"+$encryptedLink;
     
         // Récupérer les noms d'utilisateur
         $user1 = $_SESSION['username'];
@@ -62,7 +62,7 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
         // Ajouter le nouveau message à la conversation
         $conversation[] = [
             'sender' => $user1,
-            'content' => $message,
+            'picture' => $message,
             'timestamp' => time()
         ];
     
