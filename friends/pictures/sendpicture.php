@@ -62,7 +62,7 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] === 0) {
         $stmt->close();
     
         // Construire le nom du fichier de conversation de manière déterministe
-        $conversation_file = "../data/messages/friend/" . (strcmp($user1, $friend_username) < 0 ? "{$user1}-{$friend_username}.json" : "{$friend_username}-{$user1}.json");
+        $conversation_file = "../../data/messages/friend/" . (strcmp($user1, $friend_username) < 0 ? "{$user1}-{$friend_username}.json" : "{$friend_username}-{$user1}.json");
     
         // Charger les messages existants ou initialiser un tableau vide
         $conversation = file_exists($conversation_file) ? json_decode(file_get_contents($conversation_file), true) : [];
