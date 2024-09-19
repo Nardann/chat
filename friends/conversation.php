@@ -91,6 +91,62 @@ document.addEventListener("DOMContentLoaded", function() {
 setTimeout(function() {
                 window.scrollTo(0, document.body.scrollHeight);
             }, 5000);        });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Sélectionner les éléments
+    var openPopupBtn = document.getElementById('openPopupBtn');
+    var popup = document.getElementById('uploadPopup');
+    var closeBtn = document.querySelector('.close-btn');
+    var confirmBtn = document.getElementById('confirmBtn');
+    var uploadForm = document.getElementById('uploadForm');
+
+    // Ouvrir la popup lorsque l'utilisateur clique sur le bouton
+    openPopupBtn.addEventListener('click', function() {
+        popup.style.display = 'block';
+    });
+
+    // Fermer la popup lorsqu'on clique sur la croix
+    closeBtn.addEventListener('click', function() {
+        popup.style.display = 'none';
+    });
+
+    // Fermer la popup lorsqu'on clique en dehors du contenu
+    window.addEventListener('click', function(event) {
+        if (event.target === popup) {
+            popup.style.display = 'none';
+        }
+    });
+
+    // Action lors de la confirmation de l'import
+    confirmBtn.addEventListener('click', function() {
+        var fileInput = document.getElementById('fileUpload');
+
+        if (fileInput.files.length === 0) {
+            alert("Veuillez choisir une image avant de confirmer.");
+            return;
+        }
+
+        // Vous pouvez ajouter ici une requête AJAX pour envoyer le fichier
+        var formData = new FormData(uploadForm);
+
+        // Envoi de l'image via AJAX
+        fetch('upload.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert("Image uploadée avec succès !");
+            popup.style.display = 'none';
+            // Vous pouvez également mettre à jour l'interface utilisateur ici.
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\'upload:', error);
+            alert("Une erreur s'est produite lors de l'upload.");
+        });
+    });
+});
+
 </script>
 
 <?php include('../includes/footer.php'); ?>
