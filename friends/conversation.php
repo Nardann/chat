@@ -80,11 +80,11 @@ function loadMessages() {
                 var formattedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear().toString().slice(-2); // Ex: 24/09/24
                 var formattedTime = date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2); // Ex: 13:45
 
-                var timestampHtml = '<span class="timestamp"style:"float:right;"><i>' + formattedTime + ' ' + formattedDate + '</i></span>';
+                var timestampHtml = '<span class="timestamp" style:"float:right;"><i>' + formattedTime + ' ' + formattedDate + '</i></span>';
 
                 // Affichage du message ou de l'image
                 if (message.content) {
-                    $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + '</p>' + timestampHtml);
+                    $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + timestampHtml +'</p>');
                 } 
                 else if (message.picture) {
                     $('#messages').append('<p><strong>' + sender + ':</strong> <img src="' + message.picture + '" alt="Image" style="max-width:15%;">' + timestampHtml + '</p>');
