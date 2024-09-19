@@ -84,7 +84,7 @@ function loadMessages() {
 
                 // Affichage du message ou de l'image
                 if (message.content) {
-                    $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + timestampHtml + '</p>');
+                    $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + '</p>' + timestampHtml);
                 } 
                 else if (message.picture) {
                     $('#messages').append('<p><strong>' + sender + ':</strong> <img src="' + message.picture + '" alt="Image" style="max-width:15%;">' + timestampHtml + '</p>');
