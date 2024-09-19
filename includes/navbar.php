@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid nav_bar">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
             <div class="d-flex flex-column justify-content-between text-white min-vh-100">
