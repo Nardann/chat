@@ -108,14 +108,7 @@ $('#messageForm').submit(function(e) {
     });
 });
 
-$(document).ready(function() {
-    loadMessages();
-    setInterval(loadMessages, 5000);
-});
-document.addEventListener("DOMContentLoaded", function() {
-setTimeout(function() {
-                window.scrollTo(0, document.body.scrollHeight);
-            }, 5000);        });
+
 
 
 </script>
