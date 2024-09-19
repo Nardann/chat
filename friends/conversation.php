@@ -74,19 +74,24 @@ function loadMessages() {
             $('#messages').empty();
             data.forEach(function(message) {
                 var sender = message.sender === '<?php echo $user1; ?>' ? 'You' : '<?php echo $friend_username; ?>';
+                
+                // Convertir le timestamp en date lisible
+                var date = new Date(message.timestamp * 1000); // Multiplier par 1000 car le timestamp est en secondes
+                var formattedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+                var formattedTime = date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2); // Ajoute un 0 devant les minutes si nécessaire
 
-                // Vérifier si le contenu du message est défini
+                // Affichage du message ou de l'image
                 if (message.content) {
-                    $('#messages').append('<div><p><strong>' + sender + ':</strong> ' + message.content + '</p></div>');
+                    $('#messages').append('<p><strong>' + sender + ' (' + formattedDate + ' ' + formattedTime + '):</strong> ' + message.content + '</p>');
                 } 
-                // Si le contenu n'est pas défini mais que l'image l'est, afficher l'image
                 else if (message.picture) {
-                    $('#messages').append('<div><p><strong>' + sender + ':</strong></p> <img src="' + message.picture + '" alt="Image" style="max-width:10%;"></div>');
+                    $('#messages').append('<p><strong>' + sender + ' (' + formattedDate + ' ' + formattedTime + '):</strong> <img src="' + message.picture + '" alt="Image" style="max-width:100%;"></p>');
                 }
             });
         }
     });
 }
+
 
 $('#messageForm').submit(function(e) {
     e.preventDefault();
