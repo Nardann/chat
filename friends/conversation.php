@@ -40,17 +40,25 @@ $stmt->close();
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 function loadMessages() {
-$.ajax({
-    url: 'get_messages.php',
-    type: 'GET',
-    data: { friend_id: '<?php echo $friend_id; ?>' },
-    success: function(data) {
-        $('#messages').empty();
-        data.forEach(function(message) {
+    $.ajax({
+        url: 'get_messages.php',
+        type: 'GET',
+        data: { friend_id: '<?php echo $friend_id; ?>' },
+        success: function(data) {
+            $('#messages').empty();
+            data.forEach(function(message) {
                 var sender = message.sender === '<?php echo $user1; ?>' ? 'You' : '<?php echo $friend_username; ?>';
-                $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + '</p>');
-        });
-    }
+
+                // Vérifier si le contenu du message est défini
+                if (message.content) {
+                    $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + '</p>');
+                } 
+                // Si le contenu n'est pas défini mais que l'image l'est, afficher l'image
+                else if (message.picture) {
+                    $('#messages').append('<p><strong>' + sender + ':</strong> <img src="' + message.picture + '" alt="Image" style="max-width:100%;"></p>');
+                }
+            });
+        }
     });
 }
 
