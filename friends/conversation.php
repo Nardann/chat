@@ -76,16 +76,18 @@ function loadMessages() {
                 var sender = message.sender === '<?php echo $user1; ?>' ? 'You' : '<?php echo $friend_username; ?>';
                 
                 // Convertir le timestamp en date lisible
-                var date = new Date(message.timestamp * 1000); // Multiplier par 1000 car le timestamp est en secondes
-                var formattedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-                var formattedTime = date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2); // Ajoute un 0 devant les minutes si nécessaire
+                var date = new Date(message.timestamp * 1000);
+                var formattedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear().toString().slice(-2); // Ex: 24/09/24
+                var formattedTime = date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2); // Ex: 13:45
+
+                var timestampHtml = '<span class="timestamp">' + formattedTime + ' ' + formattedDate + '</span>';
 
                 // Affichage du message ou de l'image
                 if (message.content) {
-                    $('#messages').append('<p><strong>' + sender + ' (' + formattedDate + ' ' + formattedTime + '):</strong> ' + message.content + '</p>');
+                    $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + timestampHtml + '</p>');
                 } 
                 else if (message.picture) {
-                    $('#messages').append('<p><strong>' + sender + ' (' + formattedDate + ' ' + formattedTime + '):</strong> <img src="' + message.picture + '" alt="Image" style="max-width:100%;"></p>');
+                    $('#messages').append('<p><strong>' + sender + ':</strong> <img src="' + message.picture + '" alt="Image" style="max-width:100%;">' + timestampHtml + '</p>');
                 }
             });
         }
