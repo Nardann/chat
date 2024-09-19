@@ -30,13 +30,21 @@ $stmt->close();
     <textarea name="message" rows="4" cols="50" required></textarea><br>
     <input type="submit" value="Send">
 </form>
-<form action="./pictures/sendpicture.php" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
-    <label for="fileUpload">Choisir une image à uploader :</label>
-    <input type="file" name="fileUpload" id="fileUpload">
-    <input type="submit" value="Uploader l'image">
-</form>
 
+    <button id="openPopupBtn">Importer une image</button>
+
+    <!-- Popup -->
+    <div id="uploadPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <h2>Choisir une image à importer</h2>
+            <form action="./pictures/sendpicture.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
+                <input type="file" name="fileUpload" id="fileUpload" accept="image/*">
+                <input type="submit" id="confirmBtn">Confirmer</button>
+            </form>
+        </div>
+    </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 function loadMessages() {
