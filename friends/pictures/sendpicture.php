@@ -1,6 +1,12 @@
 <?php
 include('../../config/config.php');
+session_start();
 
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['username'])) {
+    header("Location: ../login/login.php");
+    exit();
+}
 // Fonction pour écrire dans le fichier de log
 function writeLog($message) {
     $logFile = '../../logs/upload_log.txt'; // Définir le chemin du fichier log
