@@ -55,4 +55,4 @@
         </div>
         
         <!-- Contenu principal -->
-        <div class="col py-3">
+        <div class="col py-3" style="padding-left: 20%;">
