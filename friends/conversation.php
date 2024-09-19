@@ -48,19 +48,21 @@ $stmt->close();
       
       <!-- Corps du modal : formulaire pour l'upload -->
       <div class="modal-body">
-        <form id="imageUploadForm" enctype="multipart/form-data">
+        <form id="imageUploadForm" action="./pictures/sendpicture.php" method="post" enctype="multipart/form-data">
           <div class="mb-3">
             <label for="fileUpload" class="form-label">Choisir une image</label>
+            <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
             <input class="form-control" type="file" id="fileUpload" name="fileUpload" accept="image/*">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            <button type="button" class="btn btn-primary" id="confirmUpload">Confirmer</button>
           </div>
         </form>
       </div>
       
       <!-- Pied de page du modal avec le bouton de confirmation -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-primary" id="confirmUpload">Confirmer</button>
-      </div>
+
       
     </div>
   </div>
