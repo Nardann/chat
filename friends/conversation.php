@@ -87,7 +87,7 @@ function loadMessages() {
                     $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + timestampHtml + '</p>');
                 } 
                 else if (message.picture) {
-                    $('#messages').append('<p><strong>' + sender + ':</strong> <img src="' + message.picture + '" alt="Image" style="max-width:100%;">' + timestampHtml + '</p>');
+                    $('#messages').append('<p><strong>' + sender + ':</strong> <img src="' + message.picture + '" alt="Image" style="max-width:15%;">' + timestampHtml + '</p>');
                 }
             });
         }
