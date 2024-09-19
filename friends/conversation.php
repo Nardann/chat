@@ -30,21 +30,41 @@ $stmt->close();
     <textarea name="message" rows="4" cols="50" required></textarea><br>
     <input type="submit" value="Send">
 </form>
+<!-- Bouton pour ouvrir le modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadImageModal">
+  Importer une image
+</button>
 
-    <button id="openPopupBtn">Importer une image</button>
-
-    <!-- Popup -->
-    <div id="uploadPopup" class="popup">
-        <div class="popup-content">
-            <span class="close-btn">&times;</span>
-            <h2>Choisir une image à importer</h2>
-            <form action="./pictures/sendpicture.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
-                <input type="file" name="fileUpload" id="fileUpload" accept="image/*">
-                <input type="submit" id="confirmBtn">Confirmer</button>
-            </form>
-        </div>
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="uploadImageModal" tabindex="-1" aria-labelledby="uploadImageModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <!-- En-tête du modal -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadImageModalLabel">Importer une image</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <!-- Corps du modal : formulaire pour l'upload -->
+      <div class="modal-body">
+        <form id="imageUploadForm" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="fileUpload" class="form-label">Choisir une image</label>
+            <input class="form-control" type="file" id="fileUpload" name="fileUpload" accept="image/*">
+          </div>
+        </form>
+      </div>
+      
+      <!-- Pied de page du modal avec le bouton de confirmation -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary" id="confirmUpload">Confirmer</button>
+      </div>
+      
     </div>
+  </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 function loadMessages() {
@@ -92,60 +112,6 @@ setTimeout(function() {
                 window.scrollTo(0, document.body.scrollHeight);
             }, 5000);        });
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Sélectionner les éléments
-    var openPopupBtn = document.getElementById('openPopupBtn');
-    var popup = document.getElementById('uploadPopup');
-    var closeBtn = document.querySelector('.close-btn');
-    var confirmBtn = document.getElementById('confirmBtn');
-    var uploadForm = document.getElementById('uploadForm');
-
-    // Ouvrir la popup lorsque l'utilisateur clique sur le bouton
-    openPopupBtn.addEventListener('click', function() {
-        popup.style.display = 'block';
-    });
-
-    // Fermer la popup lorsqu'on clique sur la croix
-    closeBtn.addEventListener('click', function() {
-        popup.style.display = 'none';
-    });
-
-    // Fermer la popup lorsqu'on clique en dehors du contenu
-    window.addEventListener('click', function(event) {
-        if (event.target === popup) {
-            popup.style.display = 'none';
-        }
-    });
-
-    // Action lors de la confirmation de l'import
-    confirmBtn.addEventListener('click', function() {
-        var fileInput = document.getElementById('fileUpload');
-
-        if (fileInput.files.length === 0) {
-            alert("Veuillez choisir une image avant de confirmer.");
-            return;
-        }
-
-        // Vous pouvez ajouter ici une requête AJAX pour envoyer le fichier
-        var formData = new FormData(uploadForm);
-
-        // Envoi de l'image via AJAX
-        fetch('upload.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            alert("Image uploadée avec succès !");
-            popup.style.display = 'none';
-            // Vous pouvez également mettre à jour l'interface utilisateur ici.
-        })
-        .catch(error => {
-            console.error('Erreur lors de l\'upload:', error);
-            alert("Une erreur s'est produite lors de l'upload.");
-        });
-    });
-});
 
 </script>
 
