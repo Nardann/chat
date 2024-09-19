@@ -60,10 +60,6 @@ $stmt->close();
           </div>
         </form>
       </div>
-      
-      <!-- Pied de page du modal avec le bouton de confirmation -->
-
-      
     </div>
   </div>
 </div>
