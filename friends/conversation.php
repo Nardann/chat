@@ -77,11 +77,11 @@ function loadMessages() {
 
                 // Vérifier si le contenu du message est défini
                 if (message.content) {
-                    $('#messages').append('<p><strong>' + sender + ':</strong> ' + message.content + '</p>');
+                    $('#messages').append('<div><p><strong>' + sender + ':</strong> ' + message.content + '</p></div>');
                 } 
                 // Si le contenu n'est pas défini mais que l'image l'est, afficher l'image
                 else if (message.picture) {
-                    $('#messages').append('<p><strong>' + sender + ':</strong> <img src="' + message.picture + '" alt="Image" style="max-width:10%;"></p>');
+                    $('#messages').append('<div><p><strong>' + sender + ':</strong></p> <img src="' + message.picture + '" alt="Image" style="max-width:10%;"></div>');
                 }
             });
         }
