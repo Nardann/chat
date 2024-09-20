@@ -22,8 +22,8 @@ $friend_username = $result->fetch_assoc()['username'];
 $stmt->close();
 ?>
 
-<h2 style="position:fixed;">Conversation with <?php echo $friend_username; ?></h2>
-<div id="messages"  style="top:20px;"></div>
+<h2 style="position:fixed; background-color:red;">Conversation with <?php echo $friend_username; ?></h2>
+<div id="messages"  style="margin-top:50px;"></div>
 
 <form class="messageForm" id="messageForm">
     <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
