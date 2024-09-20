@@ -22,7 +22,7 @@ $friend_username = $result->fetch_assoc()['username'];
 $stmt->close();
 ?>
 
-<h2 style="position:fixed;">Conversation with <?php echo $friend_username; ?></h2>
+<h2 style="position:fixed; bottom:20px;">Conversation with <?php echo $friend_username; ?></h2>
 <div id="messages"></div>
 
 <form class="messageForm" id="messageForm">
