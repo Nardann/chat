@@ -27,7 +27,7 @@ $stmt->bind_param("ii", $user_id, $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-echo "<h2>Your Friends</h2>";
+echo "<h2>Vos amis</h2>";
 while ($row = $result->fetch_assoc()) {
     $friend_id = $row['id'];
     $friend_username = $row['username'];
