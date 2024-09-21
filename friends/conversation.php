@@ -28,10 +28,10 @@ $stmt->close();
 <form class="messageForm" id="messageForm">
     <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
     <textarea name="message" rows="4" cols="50" required></textarea><br>
-    <input type="submit" value="Envoyer">
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadImageModal">
-  Images
-</button>
+    <input type="submit" class="btn btn-primary" value="Envoyer">
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#uploadImageModal">
+      Images
+    </button>
 </form>
 <!-- Bouton pour ouvrir le modal -->
 
