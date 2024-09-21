@@ -20,7 +20,7 @@ $user_id = $user['id'];
 
 <h2>Search Users</h2>
 <form action="search.php" method="GET">
-    <label for="username">Username:</label>
+    <label for="username">Nom d'utilisateur :</label>
     <input type="text" id="username" name="username" required>
 </form>
 
