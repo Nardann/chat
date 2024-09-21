@@ -22,17 +22,17 @@ $friend_username = $result->fetch_assoc()['username'];
 $stmt->close();
 ?>
 
-<h2 style="position:fixed; background-color:white; border-radius:10px; padding:20px;">Conversation with <?php echo $friend_username; ?></h2>
+<h2 style="position:fixed; background-color:white; border-radius:10px; padding:20px;">Conversation avec <?php echo $friend_username; ?></h2>
 <div id="messages"  style="margin-top:50px;"></div>
 
 <form class="messageForm" id="messageForm">
     <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
     <textarea name="message" rows="4" cols="50" required></textarea><br>
-    <input type="submit" value="Send">
+    <input type="submit" value="Envoyer">
 </form>
 <!-- Bouton pour ouvrir le modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadImageModal">
-  Importer une image
+  Images
 </button>
 
 <!-- Modal Bootstrap -->
