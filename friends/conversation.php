@@ -23,7 +23,7 @@ $stmt->close();
 ?>
 
 <h2 style="position:fixed; background-color:white; border-radius:10px; padding:20px;">Conversation avec <?php echo $friend_username; ?></h2>
-<div id="messages"  style="margin-top:50px;"></div>
+<div id="messages"  style="margin-top:100px;"></div>
 
 <form class="messageForm" id="messageForm">
     <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
