@@ -23,7 +23,7 @@ $user_id = $user['id'];
     <label for="username">Nom d'utilisateur :</label>
     <input type="text" id="username" name="username" required>
 </form>
-
+<br>
 <h2>Résultats</h2>
 <div id="search-results"></div>
 
