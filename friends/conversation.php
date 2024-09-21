@@ -29,11 +29,12 @@ $stmt->close();
     <input type="hidden" name="friend_id" value="<?php echo $friend_id; ?>">
     <textarea name="message" rows="4" cols="50" required></textarea><br>
     <input type="submit" value="Envoyer">
-</form>
-<!-- Bouton pour ouvrir le modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadImageModal">
   Images
 </button>
+</form>
+<!-- Bouton pour ouvrir le modal -->
+
 
 <!-- Modal Bootstrap -->
 <div class="modal fade" id="uploadImageModal" tabindex="-1" aria-labelledby="uploadImageModalLabel" aria-hidden="true">
