@@ -18,13 +18,13 @@ $user = $result->fetch_assoc();
 $user_id = $user['id'];
 ?>
 
-<h2>Search Users</h2>
+<h2>Rechercher un utilisateur</h2>
 <form action="search.php" method="GET">
     <label for="username">Nom d'utilisateur :</label>
     <input type="text" id="username" name="username" required>
 </form>
 
-<h2>Search Results</h2>
+<h2>Résultats</h2>
 <div id="search-results"></div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
